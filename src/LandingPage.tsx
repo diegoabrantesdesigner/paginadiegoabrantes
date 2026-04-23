@@ -1,6 +1,5 @@
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
-import ProblemSection from './components/ProblemSection'
 import StackedCards from './components/StackedCards'
 import BenefitsGrid from './components/BenefitsGrid'
 import MarketProblems from './components/MarketProblems'
@@ -20,11 +19,10 @@ export default function LandingPage() {
     <>
       <Hero />
       <Marquee />
-      <ProblemSection />
+      <MarketProblems />
       <BenefitsGrid />
       <StackedCards />
 
-      <MarketProblems />
       <Portfolio />
       <BeforeAfter />
       <Testimonials />
