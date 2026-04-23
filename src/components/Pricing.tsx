@@ -237,41 +237,49 @@ export default function Pricing() {
     setAllDetailsOpen(!allDetailsOpen);
   };
 
-  // Reset accordion when switching tabs
   const handleTabChange = (key: TabKey) => {
     setActiveTab(key);
     setAllDetailsOpen(false);
   };
 
   return (
-    <section id="planos" ref={ref} className="bg-bg-dark pt-4 sm:pt-6 pb-20 sm:pb-32">
-      <div className="container-max">
+    <section id="planos" ref={ref} className="bg-bg-dark pt-4 sm:pt-6 pb-20 sm:pb-32 overflow-hidden">
+      <div className="container-max px-6 sm:px-4">
         <div className={`text-center scroll-reveal ${isRevealed ? 'revealed' : ''}`}>
           <h2 className="font-syne font-bold text-2xl sm:text-3xl lg:text-4xl text-white">
             Nossos Planos
           </h2>
         </div>
 
-        {/* Tabs — only 2 now */}
-        <div className={`flex flex-wrap justify-center gap-2 mt-10 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '200ms' }}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => handleTabChange(tab.key)}
-              className={`px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-300 ${
-                activeTab === tab.key
-                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
-                  : 'bg-white/5 text-gray-mid hover:bg-white/10 hover:text-white border border-white/10'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+        {/* Premium Pill Toggle */}
+        <div className={`flex justify-center mt-12 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '200ms' }}>
+          <div className="relative flex bg-white/[0.03] p-1 rounded-full border border-white/10 w-full max-w-[500px]">
+            {/* Sliding Background */}
+            <div 
+              className="absolute top-1 bottom-1 left-1 bg-white/[0.07] rounded-full transition-all duration-500 ease-out z-0"
+              style={{ 
+                width: 'calc(50% - 4px)',
+                transform: `translateX(${activeTab === 'dropshipping' ? '0%' : '100%'})`
+              }}
+            />
+            
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => handleTabChange(tab.key)}
+                className={`relative z-10 flex-1 px-4 py-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap ${
+                  activeTab === tab.key ? 'text-white' : 'text-gray-mid hover:text-white'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Plans Grid */}
-        <div className="mt-10 sm:mt-12 tab-fade-enter" key={activeTab}>
-          <div className={`grid gap-6 ${
+        <div className="mt-12 sm:mt-16 tab-fade-enter" key={activeTab}>
+          <div className={`grid gap-8 ${
             plans[activeTab].length === 2
               ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto'
               : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
@@ -287,22 +295,22 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Bonus — Square cards in vertical grid */}
-        <div className={`mt-16 sm:mt-20 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '400ms' }}>
-          <h3 className="font-syne font-bold text-xl sm:text-2xl text-white text-center">
-            BÔNUS EXCLUSIVOS
+        {/* Bonus */}
+        <div className={`mt-20 sm:mt-24 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '400ms' }}>
+          <h3 className="font-syne font-bold text-xl sm:text-2xl text-white text-center uppercase tracking-widest">
+            Bônus Exclusivos
           </h3>
-          <p className="text-gray-mid text-sm text-center mt-2 max-w-lg mx-auto">
+          <p className="text-gray-mid text-sm text-center mt-3 max-w-lg mx-auto">
             Inclusos gratuitamente em todos os planos Enterprise e Branding.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-10 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-12 max-w-7xl mx-auto">
             {bonusItems.map((item, i) => {
               const isExclusive = 'exclusive' in item && item.exclusive;
               return (
                 <div
                   key={i}
-                  className={`group relative bg-white/[0.03] border rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:bg-white/[0.06] cursor-pointer ${
+                  className={`group relative bg-white/[0.03] border rounded-2xl p-6 transition-all duration-500 hover:bg-white/[0.06] cursor-pointer ${
                     isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
                   }`}
                 >
@@ -312,21 +320,18 @@ export default function Pricing() {
                     </span>
                   )}
 
-                  {/* Toggle Switch */}
                   <div className="mb-4">
                     <div className="w-12 h-6 rounded-full bg-white/10 group-hover:bg-blue-500 transition-all duration-500 relative">
                       <div className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white/60 group-hover:bg-white group-hover:translate-x-6 transition-all duration-500 shadow-sm" />
                     </div>
                   </div>
 
-                  {/* Title always visible */}
-                  <h4 className="font-syne font-bold text-sm sm:text-base text-white/80 group-hover:text-white transition-colors duration-500 leading-tight">
+                  <h4 className="font-syne font-bold text-sm text-white/80 group-hover:text-white transition-colors duration-500 leading-tight">
                     {item.title}
                   </h4>
 
-                  {/* Info revealed on hover */}
                   <div className="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-500 ease-out">
-                    <p className="text-gray-mid text-xs leading-relaxed mt-3">
+                    <p className="text-gray-mid text-[11px] leading-relaxed mt-3">
                       {item.text}
                     </p>
                     <div className="mt-3 flex items-center gap-1.5">
@@ -339,7 +344,7 @@ export default function Pricing() {
             })}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-14">
             <ArrowButton
               href="https://wa.me/message/ON37MF5FNKZVH1"
               target="_blank"
