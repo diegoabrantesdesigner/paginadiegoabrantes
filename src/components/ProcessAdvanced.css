@@ -183,23 +183,38 @@
 .step-icon-circle::before {
   content: '';
   position: absolute;
-  inset: -50%;
+  inset: -100%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 150deg,
-    rgba(59, 130, 246, 0.6) 180deg,
-    transparent 210deg,
+    transparent 160deg,
+    #3b82f6 180deg,
+    transparent 200deg,
     transparent 360deg
   );
-  animation: rotate 3s linear infinite;
+  animation: rotate 2s linear infinite;
   z-index: -1;
   opacity: 0;
+  filter: blur(6px);
   transition: opacity 0.4s ease;
 }
 
 .timeline-item.is-active .step-icon-circle::before {
   opacity: 1;
+}
+
+/* Extra layer for a sharper border glow */
+.step-icon-circle::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: #101213;
+  border-radius: 11px;
+  z-index: -1;
+}
+
+.timeline-item.is-active .step-icon-circle::after {
+  background: #3b82f6;
 }
 
 @keyframes rotate {
