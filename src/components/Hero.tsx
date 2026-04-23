@@ -1,27 +1,5 @@
 import { useEffect, useState } from 'react';
 import ArrowButton from './ArrowButton';
-import { TrendingUp, Eye, DollarSign } from 'lucide-react';
-
-const floatingCards = [
-  {
-    icon: TrendingUp,
-    label: 'Vendas',
-    value: '+127%',
-    barHeights: [30, 45, 35, 60, 50, 75, 90],
-  },
-  {
-    icon: Eye,
-    label: 'Visitas Online',
-    value: '12.4K',
-    barHeights: [40, 55, 45, 70, 65, 80, 95],
-  },
-  {
-    icon: DollarSign,
-    label: 'Faturamento/Semana',
-    value: 'R$28.5K',
-    barHeights: [25, 40, 55, 45, 70, 60, 85],
-  },
-];
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -97,34 +75,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-
-
-
-
-
-function FloatingCard({ card }: { card: typeof floatingCards[0] }) {
-  const Icon = card.icon;
-  return (
-    <div className="w-[110px] sm:w-[140px] lg:w-[150px] bg-emerald-950/60 backdrop-blur-md border border-emerald-500/20 rounded-xl p-2.5 sm:p-3 lg:p-3.5 shadow-xl shadow-emerald-900/20">
-      <div className="flex items-center gap-1.5 mb-1">
-        <Icon size={11} className="text-emerald-400" />
-        <span className="text-[8px] sm:text-[9px] lg:text-[10px] text-emerald-300/60 truncate">{card.label}</span>
-      </div>
-      <p className="font-syne font-bold text-sm sm:text-base lg:text-lg text-emerald-400">
-        {card.value}
-      </p>
-      <div className="flex items-end gap-[2px] mt-1 h-[14px] sm:h-[18px]">
-        {card.barHeights.map((h, j) => (
-          <div
-            key={j}
-            className="flex-1 rounded-sm bg-emerald-400 opacity-50"
-            style={{ height: `${h}%` }}
-          />
-        ))}
-      </div>
-    </div>
   );
 }

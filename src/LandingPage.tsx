@@ -1,7 +1,6 @@
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import ProblemSection from './components/ProblemSection'
-import StatsCounter from './components/StatsCounter'
 import StackedCards from './components/StackedCards'
 import BenefitsGrid from './components/BenefitsGrid'
 import MarketProblems from './components/MarketProblems'

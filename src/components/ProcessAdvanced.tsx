@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import ArrowButton from './ArrowButton';
 import { Search, Target, Layout, Palette, Code2, Rocket } from 'lucide-react';
@@ -102,8 +102,7 @@ export default function ProcessAdvanced() {
       id="processo" 
       ref={(el) => {
         sectionRef.current = el;
-        if (typeof revealRef === 'function') revealRef(el);
-        else if (revealRef) (revealRef as any).current = el;
+        if (revealRef) (revealRef as any).current = el;
       }}
       className="process-timeline-container pb-20"
     >
