@@ -1,0 +1,392 @@
+.process-timeline-container {
+  position: relative;
+  background: var(--color-bg-dark);
+  padding-top: 4rem;
+  overflow: hidden;
+}
+
+.timeline-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 4rem 0;
+}
+
+/* Vertical Line */
+.timeline-line-base {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-line-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, #3b82f6, #06b6d4, #3b82f6);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  transition: height 0.1s linear;
+  border-radius: 2px;
+}
+
+/* Timeline Items */
+.timeline-items {
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6rem;
+  width: 100%;
+  opacity: 0.15;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.timeline-item.is-completed {
+  opacity: 0.6;
+}
+
+/* Zig-Zag Desktop */
+.item-left {
+  justify-content: flex-start;
+  padding-right: 50%;
+}
+
+.item-right {
+  justify-content: flex-end;
+  padding-left: 50%;
+}
+
+
+/* Center Dot */
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #101213;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.4s ease;
+}
+
+.timeline-item.is-active .timeline-dot {
+  border-color: #3b82f6;
+  background: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+
+.timeline-item.is-completed .timeline-dot {
+  border-color: #3b82f6;
+  background: transparent;
+}
+
+.dot-inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.4s ease;
+}
+
+.timeline-item.is-active .dot-inner {
+  background: white;
+}
+
+/* Content Card */
+.timeline-content-card {
+  width: 100%;
+  max-width: 540px;
+  padding: 0;
+}
+
+
+.step-card-glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-item.is-active .step-card-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  transform: translateY(-10px);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.step-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+  transition: all 0.4s ease;
+}
+
+.timeline-item.is-active .step-icon-circle {
+  background: #3b82f6;
+  color: white;
+  transform: rotate(-10deg);
+}
+
+.step-number-tag {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.875rem;
+  color: #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.card-text {
+  font-size: 1.1rem;
+  color: #98A7AF;
+  line-height: 1.6;
+}
+
+/* CTA */
+.timeline-cta {
+  text-align: center;
+  margin-top: 6rem;
+  padding: 0 1.5rem;
+}
+
+/* Impact phrase styles */
+.impact-phrase {
+  margin-bottom: 3.5rem;
+  animation: fadeIn 1s ease-out;
+}
+.impact-text-italic {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #98A7AF;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+
+@media (max-width: 640px) {
+  .impact-text-italic {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .impact-text-italic {
+    font-size: 2.15rem; /* Significantly increased for desktop impact */
+    line-height: 1.4;
+    max-width: 1000px;
+    color: #ffffff; /* Brightened for larger text impact */
+  }
+}
+
+
+
+
+
+
+/* Social Proof Block */
+.social-proof-block {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  width: max-content; /* Only triggers hover when mouse is directly over the images */
+}
+
+
+.avatar-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-left: -12px;
+  background: #1a2530;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(100%);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Sequential Color Transition - Removed per request to allow individual hover only */
+/* .avatar-group:hover .avatar-circle { filter: grayscale(0%); } */
+
+/* Individual Highlight */
+.avatar-circle:hover {
+  transform: scale(1.2) translateY(-4px) !important;
+  z-index: 10 !important;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+  border-color: #3b82f6;
+  filter: grayscale(0%) !important; /* Turns color ONLY when hovered individually */
+}
+
+
+.social-proof-text {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+  .avatar-circle {
+    width: 38px;
+    height: 38px;
+    margin-left: -10px;
+  }
+  
+  .social-proof-text {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Fix CTA button text size on mobile to prevent 2-line break */
+@media (max-width: 640px) {
+  .timeline-cta .btn-primary {
+    font-size: 0.6rem; /* Smaller font to fit in one line */
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+  }
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .timeline-wrapper {
+    padding: 2rem 1rem;
+    overflow: visible;
+  }
+
+  .timeline-line-base {
+    left: 35px;
+    transform: none;
+  }
+
+  .timeline-item {
+    flex-direction: row !important;
+    justify-content: flex-start;
+    padding-left: 65px;
+    padding-right: 1.5rem;
+    margin-bottom: 6rem; /* Increased spacing to prevent "stacking" feel */
+    transform: translateY(30px);
+  }
+
+
+  .timeline-dot {
+    left: 35px;
+    top: 2.2rem;
+    transform: translate(-50%, 0);
+  }
+
+
+  .timeline-item.is-active .timeline-dot {
+    transform: translate(-50%, 0) scale(1.3);
+  }
+
+  .timeline-content-card {
+    width: 100%;
+    padding: 0;
+  }
+
+  .step-card-glass {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.08); /* Better contrast on mobile */
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+
+  .card-header {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+  }
+}
+

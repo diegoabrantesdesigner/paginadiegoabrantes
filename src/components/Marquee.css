@@ -1,0 +1,119 @@
+.marquee-container-v2 {
+  position: relative;
+  width: 100%;
+  padding: 1.2rem 0; /* Thinner bar */
+  
+  /* Metallic Background Style matching card */
+  background: linear-gradient(180deg, #1e2d3b 0%, #18242F 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  
+  /* Metallic Edges */
+  border-top: 1px solid rgba(228, 244, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  /* Positioning closer to Hero */
+  margin-top: -140px; 
+  margin-bottom: 30px;
+}
+
+/* Subtle corner glow matching the card screenshot */
+.marquee-container-v2::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: 10%;
+  width: 300px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(228, 244, 255, 0.08) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.marquee-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 60px;
+  background: radial-gradient(ellipse at center, rgba(228, 244, 255, 0.12) 0%, transparent 80%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.marquee-content-v2 {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll-v2 70s linear infinite; /* Even slower for maximum elegance */
+  z-index: 2;
+}
+
+.marquee-item {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem; /* Slightly smaller for the thinner bar */
+  text-transform: uppercase;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between all elements */
+  margin-right: 1.5rem; /* Uniform gap between repetitions */
+  
+  /* Metallic Gradient Text */
+  background: linear-gradient(to right, #98A7AF, #FFFFFF, #98A7AF);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 8s linear infinite;
+}
+
+.marquee-star {
+  color: #E4F4FF;
+  filter: drop-shadow(0 0 8px rgba(228, 244, 255, 0.6));
+  flex-shrink: 0;
+}
+
+
+@keyframes scroll-v2 {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+  .marquee-container-v2 {
+    padding: 0.8rem 0;
+    margin-top: 10px; /* Changed from negative to positive to avoid covering the button */
+    margin-bottom: 20px;
+  }
+  
+  .marquee-item {
+    font-size: 0.95rem; /* Slightly smaller for mobile */
+    gap: 0.8rem;
+    margin-right: 0.8rem;
+  }
+  
+  .marquee-star {
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 0 5px rgba(228, 244, 255, 0.8));
+  }
+
+  .marquee-content-v2 {
+    animation-duration: 40s;
+  }
+}
+
+
+
+
+

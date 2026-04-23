@@ -1,0 +1,88 @@
+.guarantee-badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+
+.badge-outer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(101, 110, 124, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inner fixed circle */
+.badge-inner {
+  width: 130px;
+  height: 130px;
+  background: #18242F;
+  border-radius: 50%;
+  border: 2px solid #656E7C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+/* Rotating SVG Text on Outer Ring */
+.badge-text-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotate-badge 15s linear infinite;
+  pointer-events: none;
+}
+
+.badge-text-svg text {
+  fill: #656E7C;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@keyframes rotate-badge {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Pulsing Zap Icon */
+.zap-icon {
+  color: #ffffff;
+  filter: drop-shadow(0 0 15px rgba(229, 62, 62, 0.9)); /* Magenta/Pink Glow */
+  animation: zap-pulse 2s ease-in-out infinite;
+}
+
+@keyframes zap-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(229, 62, 62, 0.7));
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 25px rgba(229, 62, 62, 1));
+    opacity: 1;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+  .badge-outer {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .badge-inner {
+    width: 110px;
+    height: 110px;
+  }
+}
+
