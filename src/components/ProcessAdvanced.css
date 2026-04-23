@@ -134,6 +134,35 @@
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+}
+
+/* Animated spinning glow effect */
+.step-card-glass::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 150deg,
+    rgba(59, 130, 246, 0.4) 180deg,
+    transparent 210deg,
+    transparent 360deg
+  );
+  animation: rotate 4s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.timeline-item.is-active .step-card-glass::before {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .timeline-item.is-active .step-card-glass {
@@ -168,6 +197,7 @@
   background: #3b82f6;
   color: white;
   transform: rotate(-10deg);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 .step-number-tag {
