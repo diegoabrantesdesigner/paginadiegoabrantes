@@ -267,7 +267,7 @@ export default function Pricing() {
               <button
                 key={tab.key}
                 onClick={() => handleTabChange(tab.key)}
-                className={`relative z-10 flex-1 px-4 py-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap ${
+                className={`relative z-10 flex-1 px-2 sm:px-4 py-3 text-[9px] xs:text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap ${
                   activeTab === tab.key ? 'text-white' : 'text-gray-mid hover:text-white'
                 }`}
               >
