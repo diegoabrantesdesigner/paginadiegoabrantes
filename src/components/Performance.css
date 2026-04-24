@@ -90,13 +90,12 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-  transition: box-shadow 0.3s ease;
+  background: #101213;
+  transition: transform 0.3s ease;
 }
 
 .circle-wrapper:hover .circle {
-  box-shadow: 0 0 35px rgba(0, 255, 136, 0.4);
+  transform: scale(1.05);
 }
 
 .svg-overlay {
@@ -108,6 +107,12 @@
   transform: rotate(-90deg);
 }
 
+.circle-bg-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+}
+
 .circle-progress {
   fill: none;
   stroke: #00ff88;
@@ -116,7 +121,13 @@
   stroke-dasharray: 339; /* 2 * PI * 54 */
   stroke-dashoffset: 339;
   transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
+  filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6))
+          drop-shadow(0 0 12px rgba(0, 255, 136, 0.3));
+}
+
+.circle-wrapper:hover .circle-progress {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.8))
+          drop-shadow(0 0 20px rgba(0, 255, 136, 0.4));
 }
 
 .metric-number {
