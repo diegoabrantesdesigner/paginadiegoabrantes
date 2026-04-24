@@ -1,0 +1,193 @@
+/* Performance Section Styles */
+.performance-section {
+  background: linear-gradient(to bottom, #101213, #161a1d);
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.performance-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.performance-header {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.performance-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.performance-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.performance-title span {
+  color: #00ff88;
+}
+
+.performance-subtitle {
+  font-size: 1.125rem;
+  color: #98A7AF;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.metric-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.circle-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.circle-container:hover {
+  transform: scale(1.05);
+}
+
+.circle-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.svg-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+}
+
+.progress-ring__circle {
+  fill: transparent;
+  stroke: #00ff88;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.4));
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-ring__bg {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 6;
+}
+
+.metric-number {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #98A7AF;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Complementary Block */
+.performance-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.performance-features.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #E4F4FF;
+  font-weight: 500;
+}
+
+.check-icon {
+  color: #00ff88;
+  width: 20px;
+  height: 20px;
+}
+
+.google-tag {
+  font-style: italic;
+  color: #64748b;
+  font-size: 0.875rem;
+  opacity: 0;
+  transition: opacity 1s ease 0.8s;
+}
+
+.google-tag.revealed {
+  opacity: 1;
+}
+
+/* Glow Animation */
+@keyframes neonPulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.6)); }
+}
+
+.circle-container:hover .progress-ring__circle {
+  animation: neonPulse 1.5s infinite;
+}
