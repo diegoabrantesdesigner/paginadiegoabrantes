@@ -5,7 +5,7 @@ import BenefitsGrid from './components/BenefitsGrid'
 import MarketProblems from './components/MarketProblems'
 import Portfolio from './components/Portfolio'
 import BeforeAfter from './components/BeforeAfter'
-import PerformancePremium from './components/PerformancePremium'
+import Performance from './components/Performance'
 import Testimonials from './components/Testimonials'
 import ProcessAdvanced from './components/ProcessAdvanced'
 import Pricing from './components/Pricing'
@@ -26,7 +26,7 @@ export default function LandingPage() {
 
       <Portfolio />
       <BeforeAfter />
-      <PerformancePremium />
+      <Performance />
       <Testimonials />
       <ProcessAdvanced />
       <Pricing />
