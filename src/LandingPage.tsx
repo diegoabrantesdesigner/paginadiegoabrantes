@@ -26,12 +26,12 @@ export default function LandingPage() {
 
       <Portfolio />
       <BeforeAfter />
-      <Performance />
       <Testimonials />
+      <Performance />
       <ProcessAdvanced />
+      <About />
       <Pricing />
       <Guarantee />
-      <About />
       <CtaFinal />
       <FAQ />
       <PartnersStrip />
