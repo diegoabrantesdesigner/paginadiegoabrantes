@@ -49,17 +49,17 @@ const MetricCard = ({ label, value, delay, isRevealed }: { label: string; value:
     >
       <div className="circle-wrapper">
         <div className="circle">
-          <svg className="svg-overlay" viewBox="0 0 120 120">
+          <svg className="svg-overlay" viewBox="0 0 140 140">
             <circle 
               className="circle-bg-track" 
-              cx="60" 
-              cy="60" 
+              cx="70" 
+              cy="70" 
               r={radius} 
             />
             <circle 
               className="circle-progress" 
-              cx="60" 
-              cy="60" 
+              cx="70" 
+              cy="70" 
               r={radius} 
               style={{ strokeDashoffset: isRevealed ? offset : circumference }}
             />
