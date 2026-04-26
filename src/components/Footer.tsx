@@ -13,10 +13,10 @@ export default function Footer() {
     <footer className="bg-bg-dark border-t border-white/5">
       <div className="container-max section-padding pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {/* Logo */}
-          <div>
-            <Link to="/" className="hover:opacity-80 transition-opacity inline-block">
-              <img src="/logo.png" alt="Diego Abrantes — Web Designer" className="h-10 w-auto" />
+          {/* Logo Container */}
+          <div className="flex flex-col gap-6">
+            <Link to="/" className="hover:opacity-80 transition-opacity inline-block w-fit">
+              <img src="/logo.png" alt="Diego Abrantes — Web Designer" className="h-12 sm:h-14 w-auto" />
             </Link>
           </div>
 

@@ -4,24 +4,6 @@ import ArrowButton from './ArrowButton';
 
 export default function About() {
   const { ref, isRevealed } = useScrollReveal<HTMLElement>();
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 15;
-    cardRef.current.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
-  };
 
   return (
     <section id="sobre" ref={ref} className="bg-bg-dark section-padding overflow-hidden relative">
@@ -34,9 +16,6 @@ export default function About() {
           {/* Photo - First in HTML means first on Mobile */}
           <div className="lg:order-last relative group">
             <div 
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
               className="relative aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 transition-all duration-100 ease-out"
               style={{
                 boxShadow: '0 0 30px rgba(74,144,226,0.3)',
@@ -55,8 +34,8 @@ export default function About() {
             </div>
             
             {/* Decorative accents around photo */}
-            <div className="absolute -z-10 -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl animate-pulse" />
-            <div className="absolute -z-10 -bottom-6 -left-6 w-24 h-24 bg-cyan-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute -z-10 -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl" />
+            <div className="absolute -z-10 -bottom-6 -left-6 w-24 h-24 bg-cyan-500/20 rounded-full blur-2xl" />
           </div>
 
           {/* Text - Second in HTML means second on Mobile, first on Desktop due to lg:order-last on the photo */}

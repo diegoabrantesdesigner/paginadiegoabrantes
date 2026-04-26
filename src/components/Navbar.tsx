@@ -63,7 +63,7 @@ export default function Navbar() {
             overflow-hidden shadow-2xl group
           `}
           style={{ 
-            width: isHovered ? '850px' : '160px',
+            width: isHovered ? '940px' : '160px',
             borderRadius: '16px',
             transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
           }}
@@ -86,7 +86,7 @@ export default function Navbar() {
 
             {/* Nav Links (Centered between Logo and Badge) */}
             <div 
-              className={`flex-1 flex justify-center items-center gap-8 transition-all duration-300 ${
+              className={`flex-1 flex justify-center items-center gap-6 transition-all duration-300 ${
                 isHovered ? 'opacity-100 scale-100 delay-200' : 'opacity-0 scale-95 pointer-events-none'
               }`}
             >
@@ -102,9 +102,17 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Badge Container */}
-            <div className={`transition-all duration-300 shrink-0 ${isHovered ? 'opacity-100 scale-100 delay-300' : 'opacity-0 scale-75 pointer-events-none absolute right-6'}`}>
+            {/* Badge & Action Container */}
+            <div className={`flex items-center gap-3 transition-all duration-300 shrink-0 ${isHovered ? 'opacity-100 scale-100 delay-300' : 'opacity-0 scale-75 pointer-events-none absolute right-6'}`}>
               <AvailabilityBadge />
+              <a 
+                href="https://cliente-diegoabrantes.base44.app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-primary !py-2 !px-4 !text-[10px] whitespace-nowrap"
+              >
+                Área do Cliente
+              </a>
             </div>
           </div>
         </div>
@@ -157,15 +165,17 @@ export default function Navbar() {
             
             {/* Badge after FAQ link */}
             <AvailabilityBadge className="!bg-white/[0.03] !border-white/[0.08] mt-2" />
+
+            <a
+              href="https://cliente-diegoabrantes.base44.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full text-center py-4"
+            >
+              Área do Cliente
+            </a>
           </div>
 
-          <a
-            href="#planos"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#planos'); }}
-            className="btn-primary mt-auto text-center"
-          >
-            CONTRATAR AGORA
-          </a>
         </div>
       </div>
     </>

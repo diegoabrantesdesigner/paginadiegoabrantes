@@ -39,17 +39,6 @@ export default function BeforeAfter() {
     };
   }, [isDragging, handleMove]);
 
-  // Auto-movement effect on reveal
-  useEffect(() => {
-    if (isRevealed) {
-      const timer = setTimeout(() => {
-        setSliderPosition(40);
-        setTimeout(() => setSliderPosition(60), 600);
-        setTimeout(() => setSliderPosition(50), 1200);
-      }, 800);
-      return () => clearTimeout(timer);
-    }
-  }, [isRevealed]);
 
   const handleTouchMove = (e: React.TouchEvent) => {
     handleMove(e.touches[0].clientX);
