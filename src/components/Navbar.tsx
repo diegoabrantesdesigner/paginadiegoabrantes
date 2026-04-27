@@ -6,7 +6,6 @@ const navLinks = [
   { label: 'INÍCIO', href: '#inicio' },
   { label: 'SOBRE', href: '#sobre' },
   { label: 'PORTFÓLIO', href: '#portfolio' },
-  { label: 'ÁREA DO CLIENTE', href: 'https://cliente.diegoabrantes.com.br/' },
   { label: 'PLANOS', href: '#planos' },
   { label: 'FAQ', href: '#faq' },
 ];
