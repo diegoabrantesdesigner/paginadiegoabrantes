@@ -6,7 +6,7 @@ const navLinks = [
   { label: 'INÍCIO', href: '#inicio' },
   { label: 'SOBRE', href: '#sobre' },
   { label: 'PORTFÓLIO', href: '#portfolio' },
-  { label: 'CLIENTES', href: '#clientes' },
+  { label: 'ÁREA DO CLIENTE', href: 'https://cliente.diegoabrantes.com.br/' },
   { label: 'PLANOS', href: '#planos' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -27,6 +27,11 @@ export default function Navbar() {
   const handleNavClick = (href: string) => {
     setIsOpen(false);
     
+    if (href.startsWith('http')) {
+      window.open(href, '_blank');
+      return;
+    }
+
     if (location.pathname !== '/') {
       navigate('/' + href);
       return;
@@ -106,7 +111,7 @@ export default function Navbar() {
             <div className={`flex items-center gap-3 transition-all duration-300 shrink-0 ${isHovered ? 'opacity-100 scale-100 delay-300' : 'opacity-0 scale-75 pointer-events-none absolute right-6'}`}>
               <AvailabilityBadge />
               <a 
-                href="https://cliente-diegoabrantes.base44.app" 
+                href="https://cliente.diegoabrantes.com.br/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn-primary !py-2 !px-4 !text-[10px] whitespace-nowrap"
@@ -167,7 +172,7 @@ export default function Navbar() {
             <AvailabilityBadge className="!bg-white/[0.03] !border-white/[0.08] mt-2" />
 
             <a
-              href="https://cliente-diegoabrantes.base44.app"
+              href="https://cliente.diegoabrantes.com.br/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary w-full text-center py-4"
