@@ -345,11 +345,7 @@ export default function Pricing() {
           </div>
 
           <div className="text-center mt-14">
-            <ArrowButton
-              href="https://wa.me/message/ON37MF5FNKZVH1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ArrowButton href="#planos">
               CONTRATAR AGORA
             </ArrowButton>
           </div>
