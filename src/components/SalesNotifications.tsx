@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ShoppingBag } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { CheckCircle2 } from 'lucide-react';
 
 interface Notification {
   id: number;
@@ -33,8 +33,8 @@ const plans = [
 ];
 
 const timeRanges = [
-  'há 24 minutos', 'há 42 minutos', 'há 1 hora', 'há 2 horas', 'há 3 horas', 
-  'há 5 horas', 'há 8 horas', 'há 12 horas', 'há 15 horas', 'há 20 horas', 'ontem'
+  'Hoje cedo', 'Há poucas horas', 'Ontem à tarde', 'Recentemente', 'Há 4 horas', 
+  'Há 7 horas', 'Esta manhã', 'Finalizado ontem', 'Há 2 horas', 'Recentemente'
 ];
 
 export default function SalesNotifications() {
@@ -55,27 +55,24 @@ export default function SalesNotifications() {
       time: randomTime
     });
     
-    // Pequeno delay para garantir que a animação de entrada seja limpa
     setTimeout(() => {
       setIsVisible(true);
     }, 100);
 
-    // Esconde após 8 segundos (mais tempo para ler)
+    // Esconde após 10 segundos
     setTimeout(() => {
       setIsVisible(false);
-    }, 8000);
+    }, 10000);
   };
 
   useEffect(() => {
-    // Primeira notificação após 20 segundos (não assustar logo de cara)
-    const initialTimer = setTimeout(generateNotification, 20000);
+    const initialTimer = setTimeout(generateNotification, 25000);
 
-    // Intervalo muito mais longo entre notificações (entre 60 e 120 segundos)
     const interval = setInterval(() => {
       if (!isVisible) {
         generateNotification();
       }
-    }, Math.floor(Math.random() * 60000) + 60000);
+    }, Math.floor(Math.random() * 90000) + 60000); // Entre 1min e 2.5min
 
     return () => {
       clearTimeout(initialTimer);
@@ -89,35 +86,44 @@ export default function SalesNotifications() {
     <div className={`fixed bottom-6 left-6 z-[9999] transition-all duration-1000 ease-in-out transform ${
       isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-12 opacity-0 scale-90 pointer-events-none'
     }`}>
-      <div className="bg-[#1c1f21]/95 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-[320px]">
-        <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0 border border-blue-500/30 shadow-inner">
-          <ShoppingBag className="w-6 h-6 text-blue-400" />
+      <div className="bg-[#1c1f21]/95 backdrop-blur-xl border border-white/10 p-4 pr-12 rounded-2xl shadow-2xl flex items-center gap-4 max-w-[340px] relative">
+        <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0 border border-blue-500/20">
+          <CheckCircle2 className="w-6 h-6 text-blue-400" />
         </div>
         
-        <div className="flex flex-col min-w-0">
+        <div className="flex flex-col min-w-0 pr-2">
           <p className="text-[11px] font-bold text-white leading-tight">
             <span className="text-blue-400">{notification.name}</span> de {notification.city}
           </p>
           <p className="text-[10px] text-white/60 mt-0.5 truncate">
-            Acaba de adquirir: <span className="text-white/90 font-semibold">{notification.plan}</span>
+            Projeto contratado: <span className="text-white/90 font-semibold">{notification.plan}</span>
           </p>
-          <p className="text-[9px] text-white/30 mt-1 uppercase tracking-widest font-black">
-            {notification.time}
-          </p>
+          
+          <div className="flex items-center gap-3 mt-1.5">
+            <p className="text-[9px] text-white/30 uppercase tracking-widest font-black">
+              {notification.time}
+            </p>
+            <a 
+              href="#planos" 
+              onClick={() => setIsVisible(false)}
+              className="text-[9px] font-bold text-blue-400 hover:text-white uppercase tracking-wider underline underline-offset-2 transition-colors"
+            >
+              Ver Planos
+            </a>
+          </div>
         </div>
 
         <button 
           onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 text-white/10 hover:text-white transition-colors p-1"
+          className="absolute top-3 right-3 text-white/10 hover:text-white transition-colors p-1"
         >
-          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-3.2 h-3.2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
       
-      {/* Decorative glow - more subtle */}
-      <div className="absolute -inset-1 bg-blue-500/5 blur-xl rounded-2xl -z-10 animate-pulse" />
+      <div className="absolute -inset-1 bg-blue-500/5 blur-xl rounded-2xl -z-10" />
     </div>
   );
 }
