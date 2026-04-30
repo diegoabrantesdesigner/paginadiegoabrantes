@@ -32,6 +32,11 @@ const plans = [
   'Site Institucional'
 ];
 
+const timeRanges = [
+  'há 24 minutos', 'há 42 minutos', 'há 1 hora', 'há 2 horas', 'há 3 horas', 
+  'há 5 horas', 'há 8 horas', 'há 12 horas', 'há 15 horas', 'há 20 horas', 'ontem'
+];
+
 export default function SalesNotifications() {
   const [notification, setNotification] = useState<Notification | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -40,33 +45,37 @@ export default function SalesNotifications() {
     const randomName = names[Math.floor(Math.random() * names.length)];
     const randomCity = cities[Math.floor(Math.random() * cities.length)];
     const randomPlan = plans[Math.floor(Math.random() * plans.length)];
-    const randomTime = Math.floor(Math.random() * 55) + 5; // entre 5 e 60 seg
+    const randomTime = timeRanges[Math.floor(Math.random() * timeRanges.length)];
 
     setNotification({
       id: Date.now(),
       name: randomName,
       city: randomCity,
       plan: randomPlan,
-      time: `${randomTime} segundos atrás`
+      time: randomTime
     });
-    setIsVisible(true);
+    
+    // Pequeno delay para garantir que a animação de entrada seja limpa
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
 
-    // Esconde após 6 segundos
+    // Esconde após 8 segundos (mais tempo para ler)
     setTimeout(() => {
       setIsVisible(false);
-    }, 6000);
+    }, 8000);
   };
 
   useEffect(() => {
-    // Primeira notificação após 5 segundos
-    const initialTimer = setTimeout(generateNotification, 5000);
+    // Primeira notificação após 20 segundos (não assustar logo de cara)
+    const initialTimer = setTimeout(generateNotification, 20000);
 
-    // Intervalo entre notificações (entre 15 e 30 segundos)
+    // Intervalo muito mais longo entre notificações (entre 60 e 120 segundos)
     const interval = setInterval(() => {
       if (!isVisible) {
         generateNotification();
       }
-    }, Math.floor(Math.random() * 15000) + 15000);
+    }, Math.floor(Math.random() * 60000) + 60000);
 
     return () => {
       clearTimeout(initialTimer);
@@ -77,11 +86,11 @@ export default function SalesNotifications() {
   if (!notification) return null;
 
   return (
-    <div className={`fixed bottom-6 left-6 z-[9999] transition-all duration-700 ease-out transform ${
+    <div className={`fixed bottom-6 left-6 z-[9999] transition-all duration-1000 ease-in-out transform ${
       isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-12 opacity-0 scale-90 pointer-events-none'
     }`}>
-      <div className="bg-[#1c1f21]/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-[320px]">
-        <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0 border border-blue-500/30">
+      <div className="bg-[#1c1f21]/95 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-[320px]">
+        <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0 border border-blue-500/30 shadow-inner">
           <ShoppingBag className="w-6 h-6 text-blue-400" />
         </div>
         
@@ -93,13 +102,13 @@ export default function SalesNotifications() {
             Acaba de adquirir: <span className="text-white/90 font-semibold">{notification.plan}</span>
           </p>
           <p className="text-[9px] text-white/30 mt-1 uppercase tracking-widest font-black">
-            há {notification.time}
+            {notification.time}
           </p>
         </div>
 
         <button 
           onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 text-white/20 hover:text-white transition-colors"
+          className="absolute top-2 right-2 text-white/10 hover:text-white transition-colors p-1"
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -107,8 +116,8 @@ export default function SalesNotifications() {
         </button>
       </div>
       
-      {/* Decorative glow */}
-      <div className="absolute -inset-1 bg-blue-500/10 blur-xl rounded-2xl -z-10 animate-pulse" />
+      {/* Decorative glow - more subtle */}
+      <div className="absolute -inset-1 bg-blue-500/5 blur-xl rounded-2xl -z-10 animate-pulse" />
     </div>
   );
 }
