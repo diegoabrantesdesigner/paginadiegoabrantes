@@ -328,6 +328,12 @@ export default function Pricing() {
               <BonusCard key={i} item={item} index={i} />
             ))}
           </div>
+
+          <div className="text-center mt-14">
+            <ArrowButton href="#planos">
+              CONTRATAR AGORA
+            </ArrowButton>
+          </div>
         </div>
       </div>
     </section>
@@ -351,7 +357,7 @@ function BonusCard({ item, index }: { item: any; index: number }) {
       style={{ 
         transform: isRevealed ? 'translateY(0)' : 'translateY(30px)',
         opacity: isRevealed ? 1 : 0,
-        transitionDelay: `${(index % 4) * 100}ms` // Stagger only horizontally for desktop
+        transitionDelay: `${(index % 4) * 100}ms`
       }}
     >
       {/* The Glass Overlay (Blur) - Fades out automatically on scroll reveal */}
@@ -405,16 +411,5 @@ function BonusCard({ item, index }: { item: any; index: number }) {
         isRevealed ? 'opacity-100' : 'opacity-0'
       }`} />
     </div>
-  );
-}
-
-          <div className="text-center mt-14">
-            <ArrowButton href="#planos">
-              CONTRATAR AGORA
-            </ArrowButton>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
