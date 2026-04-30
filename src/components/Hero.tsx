@@ -13,14 +13,14 @@ export default function Hero() {
     <section id="inicio" key="hero-final-v14" className="relative bg-bg-dark overflow-hidden min-h-[700px] sm:min-h-[850px] lg:min-h-[1000px] pt-0">
       {/* Desktop Hero Banner — Visible on tablets and up */}
       <img 
-        src="https://res.cloudinary.com/dofpghka3/image/upload/v1776811102/Banner_Site_Principal_ld0etk.png?v=2" 
+        src="https://res.cloudinary.com/diegoabrantes/image/upload/v1776811102/Banner_Site_Principal_ld0etk.png" 
         alt="Diego Abrantes Banner Desktop" 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-auto z-0 hidden sm:block"
       />
 
       {/* Mobile Hero Banner — Optimized for small screens */}
       <img 
-        src="https://res.cloudinary.com/dofpghka3/image/upload/v1776818482/Novo_Banner_Página_Mobile_ao6a8f.png" 
+        src="https://res.cloudinary.com/diegoabrantes/image/upload/v1776818482/Novo_Banner_Página_Mobile_ao6a8f.png" 
         alt="Diego Abrantes Banner Mobile" 
         className="absolute top-6 -bottom-[5px] left-1/2 -translate-x-1/2 w-full h-auto z-0 block sm:hidden scale-[1.05] translate-y-[4px]"
       />
