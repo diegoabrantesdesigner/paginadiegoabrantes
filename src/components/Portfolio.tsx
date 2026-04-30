@@ -4,14 +4,14 @@ import { ExternalLink } from 'lucide-react';
 import ArrowButton from './ArrowButton';
 
 const portfolioItems = [
-  { id: 1, label: 'Victore — Grife de Luxo', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/victore.png' },
-  { id: 2, label: 'Nobre & Co. — E-commerce Moda Feminina', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/nobre-co.png' },
-  { id: 3, label: 'Tendeli — Dropshipping Internacional', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/tendeli.png' },
-  { id: 4, label: 'The King — Dropshipping Nacional', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/the-king.png' },
-  { id: 5, label: 'Bull Strong — Suplementos', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/bull-strong.png' },
-  { id: 6, label: 'Brillamía — Dropshipping Internacional', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/brillamia.png' },
-  { id: 7, label: 'TM House Store — Dropshipping com Mascote', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/tm-house.png' },
-  { id: 8, label: 'Baseborn — E-commerce de Sneakers', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/baseborn.png' },
+  { id: 1, label: 'Victore — Grife de Luxo', alt: 'Web Design Premium para Victore - E-commerce de Moda e Grife de Luxo', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/victore.png' },
+  { id: 2, label: 'Nobre & Co. — E-commerce Moda Feminina', alt: 'Criação de Loja Virtual Nobre & Co - E-commerce de Moda Feminina e Acessórios', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/nobre-co.png' },
+  { id: 3, label: 'Tendeli — Dropshipping Internacional', alt: 'Desenvolvimento de Loja de Dropshipping Internacional Tendeli - Design de Conversão', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/tendeli.png' },
+  { id: 4, label: 'The King — Dropshipping Nacional', alt: 'Loja Profissional de Dropshipping Nacional The King - E-commerce de Alto Padrão', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/the-king.png' },
+  { id: 5, label: 'Bull Strong — Suplementos', alt: 'Landing Page para Bull Strong Suplementos - Design de Alta Performance', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/bull-strong.png' },
+  { id: 6, label: 'Brillamía — Dropshipping Internacional', alt: 'E-commerce Brillamía - Loja de Dropshipping Internacional de Jóias e Acessórios', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/brillamia.png' },
+  { id: 7, label: 'TM House Store — Dropshipping com Mascote', alt: 'Loja TM House Store - Dropshipping com Mascote e Identidade Visual Única', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/tm-house.png' },
+  { id: 8, label: 'Baseborn — E-commerce de Sneakers', alt: 'Web Design para Baseborn - E-commerce de Sneakers e Calçados de Colecionador', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/baseborn.png' },
 ];
 
 // Duplicate items for infinite scroll effect
@@ -65,7 +65,7 @@ export default function Portfolio() {
                 {item.image ? (
                   <img
                     src={item.image}
-                    alt={item.label}
+                    alt={item.alt}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 ) : (
