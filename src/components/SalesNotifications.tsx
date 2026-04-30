@@ -32,11 +32,6 @@ const plans = [
   'Site Institucional'
 ];
 
-const timeRanges = [
-  'Hoje cedo', 'Há poucas horas', 'Ontem à tarde', 'Recentemente', 'Há 4 horas', 
-  'Há 7 horas', 'Esta manhã', 'Finalizado ontem', 'Há 2 horas', 'Recentemente'
-];
-
 export default function SalesNotifications() {
   const [notification, setNotification] = useState<Notification | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -45,14 +40,19 @@ export default function SalesNotifications() {
     const randomName = names[Math.floor(Math.random() * names.length)];
     const randomCity = cities[Math.floor(Math.random() * cities.length)];
     const randomPlan = plans[Math.floor(Math.random() * plans.length)];
-    const randomTime = timeRanges[Math.floor(Math.random() * timeRanges.length)];
+    
+    // Gerar uma data aleatória entre 1 e 8 dias atrás
+    const daysAgo = Math.floor(Math.random() * 8) + 1;
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    const formattedDate = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
 
     setNotification({
       id: Date.now(),
       name: randomName,
       city: randomCity,
       plan: randomPlan,
-      time: randomTime
+      time: `Contratado em ${formattedDate}`
     });
     
     setTimeout(() => {
