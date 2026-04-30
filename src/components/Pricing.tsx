@@ -322,7 +322,7 @@ export default function Pricing() {
             Inclusos gratuitamente em todos os planos Enterprise e Branding.
           </p>
 
-          {/* Desktop & Mobile: Interactive Glass Grid */}
+          {/* Desktop & Mobile: Interactive Glass Grid with Auto Scroll Reveal */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
             {bonusItems.map((item, i) => {
               const isExclusive = 'exclusive' in item && item.exclusive;
@@ -331,12 +331,22 @@ export default function Pricing() {
               return (
                 <div
                   key={i}
-                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-700 hover:bg-white/[0.08] flex flex-col items-center text-center cursor-pointer ${
+                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-1000 flex flex-col items-center text-center ${
                     isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
-                  }`}
+                  } ${isRevealed ? 'revealed' : ''}`}
+                  style={{ 
+                    transitionDelay: `${i * 150}ms`,
+                    transform: isRevealed ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isRevealed ? 1 : 0
+                  }}
                 >
-                  {/* The Glass Overlay (Blur) - Covers everything except the badge */}
-                  <div className="absolute inset-0 z-10 backdrop-blur-xl group-hover:backdrop-blur-0 transition-all duration-700 ease-in-out pointer-events-none bg-bg-dark/20 group-hover:bg-transparent rounded-2xl" />
+                  {/* The Glass Overlay (Blur) - Fades out automatically on scroll reveal */}
+                  <div 
+                    className={`absolute inset-0 z-10 transition-all duration-1000 ease-in-out pointer-events-none rounded-2xl ${
+                      isRevealed ? 'backdrop-blur-0 bg-transparent' : 'backdrop-blur-xl bg-bg-dark/20'
+                    }`}
+                    style={{ transitionDelay: `${i * 150 + 300}ms` }}
+                  />
 
                   {isExclusive && (
                     <span className="absolute -top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full z-20 shadow-lg shadow-emerald-500/20">
@@ -344,32 +354,42 @@ export default function Pricing() {
                     </span>
                   )}
 
-                  {/* Icon & Title - Blurred by default */}
-                  <div className="relative z-0 group-hover:z-20 transition-all duration-500 text-center flex flex-col items-center">
-                    <div className="mb-4 transition-transform duration-500 group-hover:scale-110">
-                      <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-500">
-                        <Icon size={28} className="text-white/40 group-hover:text-blue-400 transition-colors duration-500" />
+                  {/* Icon & Title */}
+                  <div className="relative z-20 transition-all duration-700 text-center flex flex-col items-center">
+                    <div className="mb-4 transition-transform duration-500">
+                      <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border transition-all duration-700 ${
+                        isRevealed ? 'border-blue-500/30 bg-blue-500/5' : 'border-white/10'
+                      }`}>
+                        <Icon size={28} className={`transition-colors duration-700 ${isRevealed ? 'text-blue-400' : 'text-white/20'}`} />
                       </div>
                     </div>
 
-                    <h4 className="font-syne font-bold text-sm text-white/40 group-hover:text-white transition-all duration-500 uppercase tracking-widest px-2">
+                    <h4 className={`font-syne font-bold text-sm transition-all duration-700 uppercase tracking-widest px-2 ${
+                      isRevealed ? 'text-white' : 'text-white/20'
+                    }`}>
                       {item.title}
                     </h4>
                   </div>
 
-                  {/* Hidden Content - Revealed on hover */}
-                  <div className="relative z-0 group-hover:z-20 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0 mt-4">
+                  {/* Content - Revealed with delay */}
+                  <div className={`relative z-20 transition-all duration-1000 mt-4 ${
+                    isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                  style={{ transitionDelay: `${i * 150 + 500}ms` }}
+                  >
                     <p className="text-gray-mid text-xs leading-relaxed max-w-[200px] mx-auto">
                       {item.text}
                     </p>
                     <div className="mt-4 flex items-center justify-center gap-2">
                       <span className="text-white/20 text-[10px] line-through">de {item.oldPrice}</span>
-                      <span className="text-emerald-400 font-black text-xs uppercase">Grátis para você</span>
+                      <span className="text-emerald-400 font-black text-xs uppercase tracking-tighter">Grátis para você</span>
                     </div>
                   </div>
 
-                  {/* Animated Border Glow */}
-                  <div className="absolute -inset-[1px] bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/20 group-hover:via-white/10 group-hover:to-blue-500/20 rounded-2xl transition-all duration-1000 -z-10" />
+                  {/* Static Glow when revealed */}
+                  <div className={`absolute -inset-[1px] bg-gradient-to-br from-blue-500/10 via-white/5 to-blue-500/10 rounded-2xl transition-opacity duration-1000 -z-10 ${
+                    isRevealed ? 'opacity-100' : 'opacity-0'
+                  }`} />
                 </div>
               );
             })}
