@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { ChevronDown, Bot, Megaphone, Wrench, Code, Calculator } from 'lucide-react';
+import { ChevronDown, Bot, Megaphone, Wrench, Code, Calculator, Brain, Palette, LayoutTemplate } from 'lucide-react';
 import ArrowButton from './ArrowButton';
 
 type TabKey = 'dropshipping' | 'vendas';
@@ -30,7 +30,7 @@ const plans: Record<TabKey, Plan[]> = {
       priceOld: 'R$697,90',
       priceInstallment: '12x de R$50,67',
       pricePix: 'R$497,90 no Pix',
-      link: 'https://mpago.la/2Fiqg9k',
+      link: 'https://cliente.diegoabrantes.com.br',
       items: [
         'Tema Padrão', 'Identidade Visual Completa', 'Logo + Favicon', '2 Banners Desktop',
         '2 Banners Mobile', '5 categorias', '6 produtos por coleção', 'Mockup Exclusivo',
@@ -45,7 +45,7 @@ const plans: Record<TabKey, Plan[]> = {
       priceOld: 'R$1.597,90',
       priceInstallment: '12x de R$132,07',
       pricePix: 'R$1.297,90 no Pix',
-      link: 'https://mpago.la/1y5nhSa',
+      link: 'https://cliente.diegoabrantes.com.br',
       items: [
         'Tema exclusivo', 'Identidade visual única', 'Logo + favicon', '4 Variações da logo',
         '4 Banners desktop', '4 Banners mobile', '6 Banners informativos', '8 Coleções',
@@ -67,7 +67,7 @@ const plans: Record<TabKey, Plan[]> = {
       priceOld: 'R$997,90',
       priceInstallment: '12x de R$81,19',
       pricePix: 'R$797,90 no Pix',
-      link: 'https://mpago.la/2x3svbd',
+      link: 'https://cliente.diegoabrantes.com.br',
       items: [
         'Tema Profissional', 'Identidade Visual', 'Logo + Favicon', '3 Banners desktop',
         '3 Banners mobile', '6 Coleções', '7 produtos por coleção', '2 Páginas de Oferta',
@@ -87,7 +87,7 @@ const plans: Record<TabKey, Plan[]> = {
       priceOld: 'R$1.997,90',
       priceInstallment: '12x de R$152,42',
       pricePix: 'R$1.497,90 no Pix',
-      link: 'https://mpago.la/14PDCMq',
+      link: 'https://cliente.diegoabrantes.com.br',
       items: [
         'Página ONE-PAGE', 'Copywriting focado em conversão', 'Design responsivo',
         'Integração WhatsApp', 'Domínio grátis 1 ano', 'Hero com CTA', 'Problema→Solução',
@@ -101,7 +101,7 @@ const plans: Record<TabKey, Plan[]> = {
       priceOld: 'R$4.997,90',
       priceInstallment: '12x de R$305,06',
       pricePix: 'R$2.997,90 no Pix',
-      link: 'https://mpago.la/2eta4cR',
+      link: 'https://cliente.diegoabrantes.com.br',
       items: [
         'Site 5 a 7 páginas', 'Wireframe + layout personalizado', 'Design moderno responsivo',
         'Copywriting persuasivo', 'Formulário + WhatsApp', 'Pixels', 'Chat', 'SEO básico',
@@ -144,6 +144,24 @@ const bonusItems = [
     text: 'Exclusivo para lojistas: calculadora completa para precificação, taxas, margem de lucro e projeção de vendas.',
     oldPrice: 'R$197,00',
     exclusive: true,
+  },
+  {
+    icon: Brain,
+    title: 'Prompts Inteligentes',
+    text: 'Comandos prontos para IA que criam copy, anúncios e estratégias em segundos.',
+    oldPrice: 'R$147,00',
+  },
+  {
+    icon: Palette,
+    title: 'Pack Artes Editáveis - Canva',
+    text: 'Centenas de modelos prontos e profissionais para suas redes sociais e anúncios.',
+    oldPrice: 'R$247,00',
+  },
+  {
+    icon: LayoutTemplate,
+    title: 'Pack Páginas de Produtos',
+    text: 'Templates de alta conversão para você replicar nas suas ofertas e escalar.',
+    oldPrice: 'R$397,00',
   },
 ];
 
@@ -304,7 +322,7 @@ export default function Pricing() {
             Inclusos gratuitamente em todos os planos Enterprise e Branding.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
             {bonusItems.map((item, i) => {
               const isExclusive = 'exclusive' in item && item.exclusive;
               return (

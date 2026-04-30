@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import SalesNotifications from './components/SalesNotifications'
 import BackgroundDecor from './components/BackgroundDecor'
 import LandingPage from './LandingPage'
 import PolicyPage from './PolicyPage'
@@ -82,6 +83,7 @@ function App() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <SalesNotifications />
     </Router>
   )
 }
