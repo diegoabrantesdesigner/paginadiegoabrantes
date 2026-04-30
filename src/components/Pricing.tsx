@@ -322,78 +322,91 @@ export default function Pricing() {
             Inclusos gratuitamente em todos os planos Enterprise e Branding.
           </p>
 
-          {/* Desktop & Mobile: Interactive Glass Grid with Auto Scroll Reveal */}
+          {/* Desktop & Mobile: Interactive Glass Grid with Individual Scroll Reveal */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
-            {bonusItems.map((item, i) => {
-              const isExclusive = 'exclusive' in item && item.exclusive;
-              const Icon = item.icon;
-              
-              return (
-                <div
-                  key={i}
-                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-1000 flex flex-col items-center text-center ${
-                    isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
-                  } ${isRevealed ? 'revealed' : ''}`}
-                  style={{ 
-                    transitionDelay: `${i * 150}ms`,
-                    transform: isRevealed ? 'translateY(0)' : 'translateY(20px)',
-                    opacity: isRevealed ? 1 : 0
-                  }}
-                >
-                  {/* The Glass Overlay (Blur) - Fades out automatically on scroll reveal */}
-                  <div 
-                    className={`absolute inset-0 z-10 transition-all duration-1000 ease-in-out pointer-events-none rounded-2xl ${
-                      isRevealed ? 'backdrop-blur-0 bg-transparent' : 'backdrop-blur-xl bg-bg-dark/20'
-                    }`}
-                    style={{ transitionDelay: `${i * 150 + 300}ms` }}
-                  />
-
-                  {isExclusive && (
-                    <span className="absolute -top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full z-20 shadow-lg shadow-emerald-500/20">
-                      Exclusivo
-                    </span>
-                  )}
-
-                  {/* Icon & Title */}
-                  <div className="relative z-20 transition-all duration-700 text-center flex flex-col items-center">
-                    <div className="mb-4 transition-transform duration-500">
-                      <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border transition-all duration-700 ${
-                        isRevealed ? 'border-blue-500/30 bg-blue-500/5' : 'border-white/10'
-                      }`}>
-                        <Icon size={28} className={`transition-colors duration-700 ${isRevealed ? 'text-blue-400' : 'text-white/20'}`} />
-                      </div>
-                    </div>
-
-                    <h4 className={`font-syne font-bold text-sm transition-all duration-700 uppercase tracking-widest px-2 ${
-                      isRevealed ? 'text-white' : 'text-white/20'
-                    }`}>
-                      {item.title}
-                    </h4>
-                  </div>
-
-                  {/* Content - Revealed with delay */}
-                  <div className={`relative z-20 transition-all duration-1000 mt-4 ${
-                    isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                  style={{ transitionDelay: `${i * 150 + 500}ms` }}
-                  >
-                    <p className="text-gray-mid text-xs leading-relaxed max-w-[200px] mx-auto">
-                      {item.text}
-                    </p>
-                    <div className="mt-4 flex items-center justify-center gap-2">
-                      <span className="text-white/20 text-[10px] line-through">de {item.oldPrice}</span>
-                      <span className="text-emerald-400 font-black text-xs uppercase tracking-tighter">Grátis para você</span>
-                    </div>
-                  </div>
-
-                  {/* Static Glow when revealed */}
-                  <div className={`absolute -inset-[1px] bg-gradient-to-br from-blue-500/10 via-white/5 to-blue-500/10 rounded-2xl transition-opacity duration-1000 -z-10 ${
-                    isRevealed ? 'opacity-100' : 'opacity-0'
-                  }`} />
-                </div>
-              );
-            })}
+            {bonusItems.map((item, i) => (
+              <BonusCard key={i} item={item} index={i} />
+            ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BonusCard({ item, index }: { item: any; index: number }) {
+  const { ref, isRevealed } = useScrollReveal<HTMLDivElement>({ 
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px' 
+  });
+  const isExclusive = 'exclusive' in item && item.exclusive;
+  const Icon = item.icon;
+
+  return (
+    <div
+      ref={ref}
+      className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-1000 flex flex-col items-center text-center ${
+        isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
+      }`}
+      style={{ 
+        transform: isRevealed ? 'translateY(0)' : 'translateY(30px)',
+        opacity: isRevealed ? 1 : 0,
+        transitionDelay: `${(index % 4) * 100}ms` // Stagger only horizontally for desktop
+      }}
+    >
+      {/* The Glass Overlay (Blur) - Fades out automatically on scroll reveal */}
+      <div 
+        className={`absolute inset-0 z-10 transition-all duration-1000 ease-in-out pointer-events-none rounded-2xl ${
+          isRevealed ? 'backdrop-blur-0 bg-transparent' : 'backdrop-blur-xl bg-bg-dark/20'
+        }`}
+        style={{ transitionDelay: `${(index % 4) * 100 + 200}ms` }}
+      />
+
+      {isExclusive && (
+        <span className="absolute -top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full z-20 shadow-lg shadow-emerald-500/20">
+          Exclusivo
+        </span>
+      )}
+
+      {/* Icon & Title */}
+      <div className="relative z-20 transition-all duration-700 text-center flex flex-col items-center">
+        <div className="mb-4">
+          <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border transition-all duration-700 ${
+            isRevealed ? 'border-blue-500/30 bg-blue-500/5' : 'border-white/10'
+          }`}>
+            <Icon size={28} className={`transition-colors duration-700 ${isRevealed ? 'text-blue-400' : 'text-white/20'}`} />
+          </div>
+        </div>
+
+        <h4 className={`font-syne font-bold text-sm transition-all duration-700 uppercase tracking-widest px-2 ${
+          isRevealed ? 'text-white' : 'text-white/20'
+        }`}>
+          {item.title}
+        </h4>
+      </div>
+
+      {/* Content - Revealed with delay */}
+      <div className={`relative z-20 transition-all duration-1000 mt-4 ${
+        isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+      style={{ transitionDelay: `${(index % 4) * 100 + 400}ms` }}
+      >
+        <p className="text-gray-mid text-xs leading-relaxed max-w-[200px] mx-auto">
+          {item.text}
+        </p>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <span className="text-white/20 text-[10px] line-through">de {item.oldPrice}</span>
+          <span className="text-emerald-400 font-black text-xs uppercase tracking-tighter">Grátis para você</span>
+        </div>
+      </div>
+
+      {/* Static Glow when revealed */}
+      <div className={`absolute -inset-[1px] bg-gradient-to-br from-blue-500/10 via-white/5 to-blue-500/10 rounded-2xl transition-opacity duration-1000 -z-10 ${
+        isRevealed ? 'opacity-100' : 'opacity-0'
+      }`} />
+    </div>
+  );
+}
 
           <div className="text-center mt-14">
             <ArrowButton href="#planos">
