@@ -21,7 +21,7 @@ export default function ArrowButton({
   target,
   rel,
   variant = 'primary',
-  className = 'w-full sm:w-auto',
+  className = 'w-full sm:w-auto sm:min-w-[320px]',
 }: ArrowButtonProps) {
   const baseClass = variant === 'primary'
     ? 'btn-primary'

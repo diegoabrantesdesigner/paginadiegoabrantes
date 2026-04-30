@@ -99,14 +99,14 @@ export default function SalesNotifications() {
             Projeto contratado: <span className="text-white/90 font-semibold">{notification.plan}</span>
           </p>
           
-          <div className="flex items-center gap-3 mt-1.5">
+          <div className="flex items-center gap-3 mt-2">
             <p className="text-[9px] text-white/30 uppercase tracking-widest font-black">
               {notification.time}
             </p>
             <a 
               href="#planos" 
               onClick={() => setIsVisible(false)}
-              className="text-[9px] font-bold text-blue-400 hover:text-white uppercase tracking-wider underline underline-offset-2 transition-colors"
+              className="px-3 py-1.5 bg-gradient-to-br from-white to-gray-300 text-black text-[9px] font-bold uppercase tracking-wider rounded-full hover:scale-105 transition-all shadow-lg"
             >
               Ver Planos
             </a>
