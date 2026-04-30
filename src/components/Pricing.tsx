@@ -323,7 +323,7 @@ export default function Pricing() {
           </p>
 
           {/* Desktop & Mobile: Interactive Glass Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
             {bonusItems.map((item, i) => {
               const isExclusive = 'exclusive' in item && item.exclusive;
               const Icon = item.icon;
@@ -331,43 +331,45 @@ export default function Pricing() {
               return (
                 <div
                   key={i}
-                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-700 hover:bg-white/[0.08] flex flex-col items-center text-center cursor-pointer overflow-hidden ${
+                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-700 hover:bg-white/[0.08] flex flex-col items-center text-center cursor-pointer ${
                     isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
                   }`}
                 >
-                  {/* The Glass Overlay (Blur) */}
-                  <div className="absolute inset-0 z-10 backdrop-blur-md group-hover:backdrop-blur-0 transition-all duration-700 ease-in-out pointer-events-none bg-bg-dark/10 group-hover:bg-transparent" />
+                  {/* The Glass Overlay (Blur) - Covers everything except the badge */}
+                  <div className="absolute inset-0 z-10 backdrop-blur-xl group-hover:backdrop-blur-0 transition-all duration-700 ease-in-out pointer-events-none bg-bg-dark/20 group-hover:bg-transparent rounded-2xl" />
 
                   {isExclusive && (
-                    <span className="absolute -top-2.5 right-3 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full z-20">
+                    <span className="absolute -top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full z-20 shadow-lg shadow-emerald-500/20">
                       Exclusivo
                     </span>
                   )}
 
-                  {/* Icon & Title - Always semi-visible but clear on hover */}
-                  <div className="relative z-20 mb-4 transition-transform duration-500 group-hover:scale-110">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-500">
-                      <Icon size={24} className="text-white/40 group-hover:text-blue-400 transition-colors duration-500" />
+                  {/* Icon & Title - Blurred by default */}
+                  <div className="relative z-0 group-hover:z-20 transition-all duration-500 text-center flex flex-col items-center">
+                    <div className="mb-4 transition-transform duration-500 group-hover:scale-110">
+                      <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-500">
+                        <Icon size={28} className="text-white/40 group-hover:text-blue-400 transition-colors duration-500" />
+                      </div>
                     </div>
+
+                    <h4 className="font-syne font-bold text-sm text-white/40 group-hover:text-white transition-all duration-500 uppercase tracking-widest px-2">
+                      {item.title}
+                    </h4>
                   </div>
 
-                  <h4 className="relative z-20 font-syne font-bold text-sm text-white/60 group-hover:text-white transition-all duration-500 uppercase tracking-wider">
-                    {item.title}
-                  </h4>
-
                   {/* Hidden Content - Revealed on hover */}
-                  <div className="relative z-20 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0 mt-4">
-                    <p className="text-gray-mid text-[11px] leading-relaxed">
+                  <div className="relative z-0 group-hover:z-20 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0 mt-4">
+                    <p className="text-gray-mid text-xs leading-relaxed max-w-[200px] mx-auto">
                       {item.text}
                     </p>
                     <div className="mt-4 flex items-center justify-center gap-2">
                       <span className="text-white/20 text-[10px] line-through">de {item.oldPrice}</span>
-                      <span className="text-emerald-400 font-black text-xs">GRÁTIS</span>
+                      <span className="text-emerald-400 font-black text-xs uppercase">Grátis para você</span>
                     </div>
                   </div>
 
                   {/* Animated Border Glow */}
-                  <div className="absolute -inset-[1px] bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/20 group-hover:via-white/5 group-hover:to-blue-500/20 rounded-2xl transition-all duration-1000 -z-10" />
+                  <div className="absolute -inset-[1px] bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/20 group-hover:via-white/10 group-hover:to-blue-500/20 rounded-2xl transition-all duration-1000 -z-10" />
                 </div>
               );
             })}
