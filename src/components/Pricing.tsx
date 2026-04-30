@@ -322,88 +322,52 @@ export default function Pricing() {
             Inclusos gratuitamente em todos os planos Enterprise e Branding.
           </p>
 
-          {/* Mobile: Infinite Marquee */}
-          <div className="block lg:hidden mt-12 -mx-6 overflow-hidden relative">
-            <div 
-              className="flex gap-4 px-6"
-              style={{ animation: 'marquee-scroll 25s linear infinite', width: 'max-content' }}
-            >
-              {[...bonusItems, ...bonusItems].map((item, i) => {
-                const isExclusive = 'exclusive' in item && item.exclusive;
-                return (
-                  <div
-                    key={i}
-                    className={`inline-block w-[280px] bg-white/[0.03] border rounded-2xl p-6 ${
-                      isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
-                    }`}
-                  >
-                    <div className="mb-4">
-                      <div className="w-12 h-6 rounded-full bg-white/10 relative">
-                        <div className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white/60 shadow-sm" />
-                      </div>
-                    </div>
-                    <h4 className="font-syne font-bold text-sm text-white/80 leading-tight whitespace-normal">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-mid text-[11px] leading-relaxed mt-2 whitespace-normal line-clamp-2">
-                      {item.text}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-            {/* Fade edges */}
-            <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-bg-dark to-transparent z-10" />
-            <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-bg-dark to-transparent z-10" />
-          </div>
-
-          {/* Desktop: Bento Grid */}
-          <div className="hidden lg:grid grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto auto-rows-[160px]">
+          {/* Desktop & Mobile: Interactive Glass Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-7xl mx-auto">
             {bonusItems.map((item, i) => {
               const isExclusive = 'exclusive' in item && item.exclusive;
-              // Bento layout logic
-              const isLarge = i === 0 || i === 4; // ChatBot and Calculator are larger
-              const isWide = i === 1 || i === 7; // Google Ads and Pack Pages are wider
+              const Icon = item.icon;
               
               return (
                 <div
                   key={i}
-                  className={`group relative bg-white/[0.03] border rounded-2xl p-6 transition-all duration-500 hover:bg-white/[0.06] flex flex-col justify-center ${
+                  className={`group relative bg-white/[0.02] border rounded-2xl p-6 transition-all duration-700 hover:bg-white/[0.08] flex flex-col items-center text-center cursor-pointer overflow-hidden ${
                     isExclusive ? 'border-emerald-500/20' : 'border-white/[0.06]'
-                  } ${
-                    isLarge ? 'row-span-2' : ''
-                  } ${
-                    isWide ? 'col-span-2' : ''
                   }`}
                 >
+                  {/* The Glass Overlay (Blur) */}
+                  <div className="absolute inset-0 z-10 backdrop-blur-md group-hover:backdrop-blur-0 transition-all duration-700 ease-in-out pointer-events-none bg-bg-dark/10 group-hover:bg-transparent" />
+
                   {isExclusive && (
-                    <span className="absolute -top-2.5 right-3 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                    <span className="absolute -top-2.5 right-3 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full z-20">
                       Exclusivo
                     </span>
                   )}
 
-                  <div className="mb-4">
-                    <div className="w-12 h-6 rounded-full bg-white/10 group-hover:bg-blue-500 transition-all duration-500 relative">
-                      <div className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white/60 group-hover:bg-white group-hover:translate-x-6 transition-all duration-500 shadow-sm" />
+                  {/* Icon & Title - Always semi-visible but clear on hover */}
+                  <div className="relative z-20 mb-4 transition-transform duration-500 group-hover:scale-110">
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-500">
+                      <Icon size={24} className="text-white/40 group-hover:text-blue-400 transition-colors duration-500" />
                     </div>
                   </div>
 
-                  <h4 className={`font-syne font-bold text-white/80 group-hover:text-white transition-colors duration-500 leading-tight ${
-                    isLarge ? 'text-xl' : 'text-sm'
-                  }`}>
+                  <h4 className="relative z-20 font-syne font-bold text-sm text-white/60 group-hover:text-white transition-all duration-500 uppercase tracking-wider">
                     {item.title}
                   </h4>
 
-                  <p className={`text-gray-mid leading-relaxed mt-3 transition-opacity duration-500 ${
-                    isLarge ? 'text-sm' : 'text-[11px]'
-                  }`}>
-                    {item.text}
-                  </p>
-
-                  <div className="mt-4 flex items-center gap-1.5">
-                    <span className="text-gray-mid text-[10px] line-through">de {item.oldPrice}</span>
-                    <span className="text-emerald-400 font-bold text-xs">R$0,00</span>
+                  {/* Hidden Content - Revealed on hover */}
+                  <div className="relative z-20 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0 mt-4">
+                    <p className="text-gray-mid text-[11px] leading-relaxed">
+                      {item.text}
+                    </p>
+                    <div className="mt-4 flex items-center justify-center gap-2">
+                      <span className="text-white/20 text-[10px] line-through">de {item.oldPrice}</span>
+                      <span className="text-emerald-400 font-black text-xs">GRÁTIS</span>
+                    </div>
                   </div>
+
+                  {/* Animated Border Glow */}
+                  <div className="absolute -inset-[1px] bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/20 group-hover:via-white/5 group-hover:to-blue-500/20 rounded-2xl transition-all duration-1000 -z-10" />
                 </div>
               );
             })}
