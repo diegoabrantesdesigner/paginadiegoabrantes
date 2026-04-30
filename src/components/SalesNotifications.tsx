@@ -106,7 +106,7 @@ export default function SalesNotifications() {
             <a 
               href="#planos" 
               onClick={() => setIsVisible(false)}
-              className="px-3 py-1.5 bg-gradient-to-br from-white to-gray-300 text-black text-[9px] font-bold uppercase tracking-wider rounded-full hover:scale-105 transition-all shadow-lg"
+              className="px-4 py-2 bg-gradient-to-br from-white via-blue-50 to-gray-300 text-black text-[10px] font-bold uppercase tracking-wider rounded-full hover:scale-105 transition-all shadow-lg whitespace-nowrap"
             >
               Ver Planos
             </a>

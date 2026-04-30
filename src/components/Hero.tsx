@@ -66,7 +66,6 @@ export default function Hero() {
           >
             <ArrowButton 
               href="#planos" 
-              className="w-full sm:w-auto whitespace-nowrap"
               onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
             >
               CONTRATAR AGORA
