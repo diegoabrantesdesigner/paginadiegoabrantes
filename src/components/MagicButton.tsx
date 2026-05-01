@@ -4,11 +4,12 @@ import { ChevronRight } from 'lucide-react';
 interface MagicButtonProps {
   children: React.ReactNode;
   href?: string;
+  target?: string;
   onClick?: (e: React.MouseEvent) => void;
   className?: string;
 }
 
-export default function MagicButton({ children, href, onClick, className = '' }: MagicButtonProps) {
+export default function MagicButton({ children, href, target, onClick, className = '' }: MagicButtonProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -39,16 +40,16 @@ export default function MagicButton({ children, href, onClick, className = '' }:
           border: 1px solid #e5e7eb;
           background: #fff;
           color: #111827;
-          padding: 18px 60px;
+          padding: 18px 100px;
           @media (max-width: 640px) {
-            padding: 16px 40px;
+            padding: 16px 20px;
             width: 100%;
-            max-width: 280px;
+            display: flex;
           }
           font-weight: 800;
           border-radius: 9999px;
           cursor: pointer;
-          letter-spacing: .5px;
+          letter-spacing: .8px;
           transition: transform .2s ease, border-color .2s ease;
           box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 8px 24px rgba(0, 0, 0, .08);
           isolation: isolate;
@@ -56,6 +57,10 @@ export default function MagicButton({ children, href, onClick, className = '' }:
           text-transform: uppercase;
           font-size: 11px;
           white-space: nowrap;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
         }
 
         .glow-btn-huly:hover {
@@ -110,16 +115,19 @@ export default function MagicButton({ children, href, onClick, className = '' }:
         href={href}
         onClick={onClick}
         onMouseMove={handleMouseMove}
+        target={target}
         className={`glow-btn-huly ${className}`}
         style={{
           '--x': `${mousePos.x}px`,
           '--y': `${mousePos.y}px`,
         } as React.CSSProperties}
       >
-        <span className="relative z-10 flex items-center gap-2">
-          {children}
-          <ChevronRight size={18} className="transition-transform duration-300" />
-        </span>
+        <div className="relative z-10 flex items-center justify-center w-full">
+          <span className="flex items-center justify-center gap-2">
+            {children}
+            <ChevronRight size={18} className="transition-transform duration-300" />
+          </span>
+        </div>
       </a>
     </>
   );

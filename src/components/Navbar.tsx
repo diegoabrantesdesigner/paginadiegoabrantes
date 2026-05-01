@@ -113,14 +113,13 @@ export default function Navbar() {
             {/* Badge & Action Container */}
             <div className={`flex items-center gap-3 transition-all duration-300 shrink-0 ${isHovered ? 'opacity-100 scale-100 delay-300' : 'opacity-0 scale-75 pointer-events-none absolute right-6'}`}>
               <AvailabilityBadge />
-              <a 
+              <MagicButton 
                 href="https://cliente.diegoabrantes.com.br/" 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="btn-primary !py-2 !px-4 !text-[10px] whitespace-nowrap"
+                className="!py-2 !px-5 !text-[9px] !gap-1"
               >
                 Área do Cliente
-              </a>
+              </MagicButton>
             </div>
           </div>
         </div>
@@ -181,14 +180,13 @@ export default function Navbar() {
             {/* Badge after FAQ link */}
             <AvailabilityBadge className="!bg-white/[0.03] !border-white/[0.08] mt-2" />
 
-            <a
+            <MagicButton
               href="https://cliente.diegoabrantes.com.br/"
               target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-full text-center py-4"
+              className="!py-4"
             >
               Área do Cliente
-            </a>
+            </MagicButton>
           </div>
 
         </div>
