@@ -54,15 +54,6 @@ export default function Guarantee() {
               @diegoabrantes_designer
             </a>
           </p>
-
-          <div className="mt-12 flex justify-center">
-            <MagicButton 
-              href="#planos" 
-              onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
-            >
-              CONTRATAR AGORA
-            </MagicButton>
-          </div>
         </div>
       </div>
     </section>

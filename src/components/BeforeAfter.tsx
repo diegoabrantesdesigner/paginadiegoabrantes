@@ -28,21 +28,29 @@ export default function BeforeAfter() {
       setIsDragging(false);
     };
 
+    const handleWindowTouchMove = (e: TouchEvent) => {
+      if (isDragging) {
+        // Prevent page scroll when interacting with the slider
+        if (e.cancelable) e.preventDefault();
+        handleMove(e.touches[0].clientX);
+      }
+    };
+
     if (isDragging) {
       window.addEventListener('mousemove', handleWindowMouseMove);
       window.addEventListener('mouseup', handleWindowMouseUp);
+      window.addEventListener('touchmove', handleWindowTouchMove, { passive: false });
+      window.addEventListener('touchend', handleWindowMouseUp);
     }
 
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove);
       window.removeEventListener('mouseup', handleWindowMouseUp);
+      window.removeEventListener('touchmove', handleWindowTouchMove);
+      window.removeEventListener('touchend', handleWindowMouseUp);
     };
   }, [isDragging, handleMove]);
 
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
-  };
 
   return (
     <section id="antes-depois" ref={revealRef} className="before-after-section">
@@ -58,14 +66,16 @@ export default function BeforeAfter() {
           <div
             ref={containerRef}
             className="mockup-container"
+            style={{ touchAction: isDragging ? 'none' : 'pan-y' }}
             onMouseDown={(e) => {
               e.preventDefault();
               setIsDragging(true);
               handleMove(e.clientX);
             }}
-            onTouchStart={() => setIsDragging(true)}
-            onTouchEnd={() => setIsDragging(false)}
-            onTouchMove={handleTouchMove}
+            onTouchStart={(e) => {
+              setIsDragging(true);
+              handleMove(e.touches[0].clientX);
+            }}
           >
             {/* Antes (Fundo) */}
             <div className="image-container before">

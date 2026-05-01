@@ -34,14 +34,11 @@ export default function CtaFinal() {
         </p>
 
         <div className="mt-10 sm:mt-12">
-          <MagicButton
-            href="#planos"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <MagicButton 
+            href="#planos" 
+            onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
           >
-            CONTRATAR AGORA
+            QUERO UM SITE DE ALTA PERFORMANCE
           </MagicButton>
         </div>
       </div>
