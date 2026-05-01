@@ -228,7 +228,7 @@ function PlanCard({ plan, allOpen, onToggle }: { plan: Plan; allOpen: boolean; o
         <MagicButton
           href={plan.link}
           target="_blank"
-          rel="noopener noreferrer"
+          className="w-full"
         >
           SELECIONAR PLANO
         </MagicButton>
