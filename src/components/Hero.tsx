@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -64,12 +64,12 @@ export default function Hero() {
               loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            <ArrowButton 
+            <MagicButton 
               href="#planos" 
               onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
             >
               CONTRATAR AGORA
-            </ArrowButton>
+            </MagicButton>
           </div>
         </div>
       </div>
