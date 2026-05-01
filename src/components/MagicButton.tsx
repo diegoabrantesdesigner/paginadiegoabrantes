@@ -39,7 +39,12 @@ export default function MagicButton({ children, href, onClick, className = '' }:
           border: 1px solid #e5e7eb;
           background: #fff;
           color: #111827;
-          padding: 18px 40px;
+          padding: 18px 60px;
+          @media (max-width: 640px) {
+            padding: 16px 40px;
+            width: 100%;
+            max-width: 280px;
+          }
           font-weight: 800;
           border-radius: 9999px;
           cursor: pointer;
@@ -50,6 +55,7 @@ export default function MagicButton({ children, href, onClick, className = '' }:
           text-decoration: none;
           text-transform: uppercase;
           font-size: 11px;
+          white-space: nowrap;
         }
 
         .glow-btn-huly:hover {

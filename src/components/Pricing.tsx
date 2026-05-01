@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronDown, Bot, Megaphone, Wrench, Code, Calculator, Brain, Palette, LayoutTemplate } from 'lucide-react';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 
 type TabKey = 'dropshipping' | 'vendas';
 
@@ -224,15 +224,14 @@ function PlanCard({ plan, allOpen, onToggle }: { plan: Plan; allOpen: boolean; o
       </div>
 
       {/* CTA */}
-      <div className="mt-auto pt-6 space-y-3">
-        <a
+      <div className="mt-auto pt-6 space-y-4">
+        <MagicButton
           href={plan.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary w-full text-center"
         >
           SELECIONAR PLANO
-        </a>
+        </MagicButton>
         <a
           href="https://wa.me/message/ON37MF5FNKZVH1"
           target="_blank"
@@ -330,9 +329,9 @@ export default function Pricing() {
           </div>
 
           <div className="text-center mt-14">
-            <ArrowButton href="#planos">
+            <MagicButton href="#planos" onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}>
               CONTRATAR AGORA
-            </ArrowButton>
+            </MagicButton>
           </div>
         </div>
       </div>

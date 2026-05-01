@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ExternalLink } from 'lucide-react';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 
 const portfolioItems = [
   { id: 1, label: 'Victore — Grife de Luxo', alt: 'Web Design Premium para Victore - E-commerce de Moda e Grife de Luxo', color: '', url: 'https://www.behance.net/diegoabrantesdesign', image: '/assets/portfolio/victore.png' },
@@ -107,13 +107,13 @@ export default function Portfolio() {
 
       <div className="container-max">
         <div className={`text-center mt-12 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '400ms' }}>
-          <ArrowButton
+          <MagicButton
             href="https://www.behance.net/diegoabrantesdesign"
             target="_blank"
             rel="noopener noreferrer"
           >
             VER PORTFÓLIO
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>

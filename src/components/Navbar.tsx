@@ -83,9 +83,13 @@ export default function Navbar() {
                 transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
               }}
             >
-              <Link to="/" className="hover:opacity-80 transition-opacity">
+              <a 
+                href="#inicio" 
+                onClick={(e) => { e.preventDefault(); handleNavClick('#inicio'); }}
+                className="hover:opacity-80 transition-opacity"
+              >
                 <img src="/logo.png" alt="Logo" className="h-10 sm:h-12 w-auto" />
-              </Link>
+              </a>
             </div>
 
             {/* Nav Links (Centered between Logo and Badge) */}
@@ -129,9 +133,13 @@ export default function Navbar() {
       >
         <div className="relative w-full h-full flex items-center px-4">
           {/* Logo Absolute Center */}
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+          <a 
+            href="#inicio" 
+            onClick={(e) => { e.preventDefault(); handleNavClick('#inicio'); }}
+            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+          >
             <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
-          </Link>
+          </a>
           
           <button onClick={() => setIsOpen(!isOpen)} className="absolute right-2 text-white p-2">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -147,9 +155,12 @@ export default function Navbar() {
       >
         <div className="flex flex-col h-full p-8 pt-12 gap-8">
           <div className="flex items-center justify-between">
-            <Link to="/">
+            <a 
+              href="#inicio" 
+              onClick={(e) => { e.preventDefault(); handleNavClick('#inicio'); }}
+            >
               <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
-            </Link>
+            </a>
             <button onClick={() => setIsOpen(false)} className="text-white">
               <X size={32} />
             </button>
