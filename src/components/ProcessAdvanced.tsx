@@ -56,10 +56,7 @@ export default function ProcessAdvanced() {
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       
-      // Calculate how much of the section has been scrolled
-      // Progress starts when the top of the section reaches the middle of the screen
       const startTrigger = viewportHeight * 0.7;
-      const endTrigger = viewportHeight * 0.3;
       
       const sectionHeight = rect.height;
       const scrollPos = -rect.top + startTrigger;
@@ -77,10 +74,9 @@ export default function ProcessAdvanced() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-48% 0px -48% 0px', // Ultra-precise center trigger to prevent skipping
+      rootMargin: '-48% 0px -48% 0px',
       threshold: [0, 0.5, 1],
     };
-
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -118,7 +114,6 @@ export default function ProcessAdvanced() {
       </div>
 
       <div className="timeline-wrapper">
-        {/* The Vertical Line */}
         <div className="timeline-line-base">
           <div 
             className="timeline-line-fill" 
@@ -126,7 +121,6 @@ export default function ProcessAdvanced() {
           />
         </div>
 
-        {/* Timeline Items */}
         <div className="timeline-items">
           {steps.map((step, i) => {
             const Icon = step.icon;
@@ -138,12 +132,10 @@ export default function ProcessAdvanced() {
                 className={`timeline-item ${isEven ? 'item-right' : 'item-left'} ${activeStep === i ? 'is-active' : ''} ${activeStep > i ? 'is-completed' : ''}`}
                 data-index={i}
               >
-                {/* Central Dot */}
                 <div className="timeline-dot">
                   <div className="dot-inner" />
                 </div>
 
-                {/* Content Card */}
                 <div className="timeline-content-card">
                   <div className="step-card-glass">
                     <div className="card-header">
@@ -162,18 +154,13 @@ export default function ProcessAdvanced() {
         </div>
       </div>
 
-      {/* CTA at the end */}
       <div className="timeline-cta">
         <div className="impact-phrase">
           <p className="impact-text-italic">
             "A diferença entre um site bonito e um site que vende <br className="hidden sm:block" /> está nos detalhes que você acabou de ver."
           </p>
-
         </div>
 
-
-
-        
         <div className="cta-container">
           <MagicButton
             href="#planos"
@@ -193,7 +180,6 @@ export default function ProcessAdvanced() {
                     src={`/assets/clientes/cliente${i}.png`} 
                     alt={`Cliente ${i}`} 
                     onError={(e) => {
-                      // Fallback case if images don't exist yet
                       (e.target as HTMLImageElement).src = `https://i.pravatar.cc/100?img=${i + 10}`;
                     }}
                   />
@@ -202,11 +188,8 @@ export default function ProcessAdvanced() {
             </div>
             <p className="social-proof-text">Clientes reais. Resultados reais.</p>
           </div>
-
         </div>
-
       </div>
     </section>
-
   );
 }
