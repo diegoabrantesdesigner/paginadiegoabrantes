@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import DecryptText from './DecryptText';
 
 const problems = [
@@ -48,7 +48,7 @@ export default function MarketProblems() {
           </p>
 
           <div className="mt-10">
-            <ArrowButton
+            <MagicButton
               href="#planos"
               onClick={(e) => {
                 e.preventDefault();
@@ -56,7 +56,7 @@ export default function MarketProblems() {
               }}
             >
               CONTRATAR AGORA
-            </ArrowButton>
+            </MagicButton>
           </div>
         </div>
       </div>

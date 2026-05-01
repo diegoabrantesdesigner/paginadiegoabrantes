@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import BlurRevealText from './BlurRevealText';
 
 export default function CtaFinal() {
@@ -34,16 +34,15 @@ export default function CtaFinal() {
         </p>
 
         <div className="mt-10 sm:mt-12">
-          <ArrowButton
+          <MagicButton
             href="#planos"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5"
           >
             CONTRATAR AGORA
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>

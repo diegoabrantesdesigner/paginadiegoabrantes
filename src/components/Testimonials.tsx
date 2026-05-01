@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronLeft, ChevronRight, Play, CheckCircle } from 'lucide-react';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import './Testimonials.css';
 
 interface VideoTestimonial {
@@ -195,16 +195,15 @@ export default function Testimonials() {
 
       <div className="container-max">
         <div className={`text-center mt-10 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '400ms' }}>
-          <ArrowButton
-            href="https://www.instagram.com/stories/highlights/18050196478458339/"
+          <MagicButton
+            href="https://wa.me/message/ON37MF5FNKZVH1"
             target="_blank"
             rel="noopener noreferrer"
           >
             VER MAIS DEPOIMENTOS
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>
   );
 }
-

@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import {
   Target,
   Shield,
@@ -58,15 +58,12 @@ export default function WhatYouGet() {
         </div>
 
         <div className={`text-center mt-12 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '700ms' }}>
-          <ArrowButton
-            href="#planos"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <MagicButton 
+            href="#planos" 
+            onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
           >
             CONTRATAR AGORA
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>

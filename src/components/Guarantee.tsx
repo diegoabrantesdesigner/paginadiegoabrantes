@@ -1,6 +1,7 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Zap } from 'lucide-react';
 import './GuaranteeBadge.css';
+import MagicButton from './MagicButton';
 
 export default function Guarantee() {
   const { ref, isRevealed } = useScrollReveal<HTMLElement>();
@@ -25,8 +26,6 @@ export default function Guarantee() {
                   </textPath>
                 </text>
               </svg>
-
-
               
               <div className="badge-inner">
                 <Zap size={56} className="zap-icon" fill="white" />
@@ -34,11 +33,9 @@ export default function Guarantee() {
             </div>
           </div>
 
-
-          <h2 className="font-syne font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase">
+          <h2 className="font-syne font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase mt-8">
             Garantia Blindada
           </h2>
-
 
           <p className="text-gray-mid text-[0.95rem] sm:text-lg leading-relaxed mt-6">
             Depois que sua página estiver no ar, você tem{' '}
@@ -46,7 +43,6 @@ export default function Guarantee() {
             ajuste fino: trocar textos, alinhar elementos, melhorar detalhes visuais, lapidar a copy
             e deixar tudo perfeitamente alinhado com sua marca.
           </p>
-
 
           <p className="text-gray-mid text-sm mt-6">
             <a
@@ -58,6 +54,15 @@ export default function Guarantee() {
               @diegoabrantes_designer
             </a>
           </p>
+
+          <div className="mt-12 flex justify-center">
+            <MagicButton 
+              href="#planos" 
+              onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
+            >
+              CONTRATAR AGORA
+            </MagicButton>
+          </div>
         </div>
       </div>
     </section>

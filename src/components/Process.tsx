@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import { Search, Palette, Code2, Rocket, HeadphonesIcon, BarChart3 } from 'lucide-react';
 
 const steps = [
@@ -114,15 +114,15 @@ export default function Process() {
         </div>
 
         <div className={`text-center mt-12 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '800ms' }}>
-          <ArrowButton
+          <MagicButton
             href="#planos"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            CONTRATAR AGORA
-          </ArrowButton>
+            QUERO UM SITE DE ALTA PERFORMANCE
+          </MagicButton>
         </div>
       </div>
     </section>

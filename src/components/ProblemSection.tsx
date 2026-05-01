@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 
 export default function ProblemSection() {
   const { ref, isRevealed } = useScrollReveal<HTMLElement>();
@@ -18,15 +18,12 @@ export default function ProblemSection() {
         </p>
 
         <div className="mt-10 sm:mt-12">
-          <ArrowButton
-            href="#planos"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <MagicButton 
+            href="#planos" 
+            onClick={(e) => { e.preventDefault(); document.querySelector('#planos')?.scrollIntoView({ behavior: 'smooth' }); }}
           >
             CONTRATAR AGORA
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>

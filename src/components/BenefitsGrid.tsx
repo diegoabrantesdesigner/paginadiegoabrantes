@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import InteractiveBenefits from './InteractiveBenefits';
 
 export default function BenefitsGrid() {
@@ -23,7 +23,7 @@ export default function BenefitsGrid() {
         </div>
 
         <div className={`text-center mt-16 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: '400ms' }}>
-          <ArrowButton
+          <MagicButton
             href="#planos"
             onClick={(e) => {
               e.preventDefault();
@@ -31,10 +31,9 @@ export default function BenefitsGrid() {
             }}
           >
             CONTRATAR AGORA
-          </ArrowButton>
+          </MagicButton>
         </div>
       </div>
     </section>
   );
 }
-

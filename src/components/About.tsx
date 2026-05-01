@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 
 export default function About() {
   const { ref, isRevealed } = useScrollReveal<HTMLElement>();
@@ -63,13 +63,13 @@ export default function About() {
             </div>
 
             <div className="mt-10">
-              <ArrowButton
+              <MagicButton
                 href="https://www.instagram.com/diegoabrantes_designer"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 ME SIGA NO INSTAGRAM
-              </ArrowButton>
+              </MagicButton>
             </div>
           </div>
 
