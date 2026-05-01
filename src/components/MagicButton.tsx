@@ -10,8 +10,7 @@ interface MagicButtonProps {
 
 export default function MagicButton({ children, href, onClick, className = '' }: MagicButtonProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!buttonRef.current) return;
@@ -22,82 +21,100 @@ export default function MagicButton({ children, href, onClick, className = '' }:
     });
   };
 
-  const glowCore = 'rgba(255, 255, 255, 0.8)';
-  const glowColor = 'rgba(228, 244, 255, 0.35)';
-  const glowColorStrong = 'rgba(228, 244, 255, 0.55)';
-
   return (
-    <a
-      ref={buttonRef}
-      href={href}
-      onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`relative inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl font-syne font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 overflow-visible group border border-white/10 ${className}`}
-      style={{
-        backgroundColor: '#1c1f21',
-        color: '#E4F4FF',
-        isolation: 'isolate'
-      }}
-    >
-      {/* 1. Internal Glow Layer (The "Core" of the light) */}
-      <div 
-        className="absolute pointer-events-none transition-opacity duration-300 rounded-xl overflow-hidden"
+    <>
+      <style>{`
+        .glow-btn-huly {
+          --x: 50%;
+          --y: 50%;
+          --glow-core: rgba(255, 255, 255, 0.9);
+          --glow-color: rgba(228, 244, 255, 0.4);
+          --glow-color-strong: rgba(228, 244, 255, 0.7);
+          
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          appearance: none;
+          border: 1px solid #e5e7eb;
+          background: #fff;
+          color: #111827;
+          padding: 18px 40px;
+          font-weight: 800;
+          border-radius: 9999px;
+          cursor: pointer;
+          letter-spacing: .5px;
+          transition: transform .2s ease, border-color .2s ease;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 8px 24px rgba(0, 0, 0, .08);
+          isolation: isolate;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 11px;
+        }
+
+        .glow-btn-huly:hover {
+          transform: translateY(-2px);
+          border-color: #d1d5db;
+        }
+
+        .glow-btn-huly::before,
+        .glow-btn-huly::after {
+          content: "";
+          position: absolute;
+          inset: -6px;
+          border-radius: inherit;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity .3s ease;
+          will-change: background;
+          z-index: -1;
+        }
+
+        .glow-btn-huly::before {
+          background:
+            radial-gradient(100px 100px at var(--x) var(--y),
+              var(--glow-core) 0%,
+              rgba(255, 255, 255, 0.4) 45%,
+              transparent 75%),
+            radial-gradient(160px 160px at var(--x) var(--y),
+              var(--glow-color-strong) 0%,
+              transparent 80%);
+          mix-blend-mode: screen;
+        }
+
+        .glow-btn-huly::after {
+          inset: -12px;
+          border-radius: inherit;
+          background:
+            radial-gradient(220px 220px at var(--x) var(--y),
+              var(--glow-color) 0%,
+              transparent 85%);
+          filter: blur(25px);
+          z-index: -2;
+        }
+
+        .glow-btn-huly:hover::before,
+        .glow-btn-huly:hover::after {
+          opacity: 1;
+        }
+      `}</style>
+
+      <a
+        ref={buttonRef}
+        href={href}
+        onClick={onClick}
+        onMouseMove={handleMouseMove}
+        className={`glow-btn-huly ${className}`}
         style={{
-          inset: 0,
-          opacity: isHovered ? 1 : 0,
-          background: `
-            radial-gradient(90px 90px at ${mousePos.x}px ${mousePos.y}px, 
-              ${glowCore} 0%, 
-              rgba(255, 255, 255, 0.25) 45%, 
-              transparent 70%),
-            radial-gradient(140px 140px at ${mousePos.x}px ${mousePos.y}px, 
-              ${glowColorStrong} 0%, 
-              transparent 75%)
-          `,
-          mixBlendMode: 'screen',
-          zIndex: 1
-        }}
-      />
-
-      {/* 2. External Glow Leak (The light that goes OUTSIDE) */}
-      <div 
-        className="absolute pointer-events-none transition-opacity duration-500 rounded-xl"
-        style={{
-          inset: -12,
-          opacity: isHovered ? 1 : 0,
-          background: `
-            radial-gradient(200px 200px at ${mousePos.x + 12}px ${mousePos.y + 12}px, 
-              ${glowColor} 0%, 
-              transparent 80%)
-          `,
-          filter: 'blur(25px)',
-          zIndex: -1
-        }}
-      />
-
-      {/* 3. Border Tracking Glow */}
-      <div 
-        className="absolute inset-0 z-0 transition-opacity duration-500 rounded-xl"
-        style={{
-          background: `radial-gradient(100px circle at ${mousePos.x}px ${mousePos.y}px, rgba(228, 244, 255, 0.6), transparent 100%)`,
-          opacity: isHovered ? 1 : 0,
-          padding: '1px',
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'destination-out',
-          maskComposite: 'exclude',
-        }}
-      />
-
-      {/* Button Content */}
-      <span className="relative z-10 flex items-center gap-2">
-        {children}
-        <ChevronRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-      </span>
-
-      {/* Static Background Base */}
-      <div className="absolute inset-0 bg-[#1c1f21] rounded-xl -z-20" />
-    </a>
+          '--x': `${mousePos.x}px`,
+          '--y': `${mousePos.y}px`,
+        } as React.CSSProperties}
+      >
+        <span className="relative z-10 flex items-center gap-2">
+          {children}
+          <ChevronRight size={18} className="transition-transform duration-300" />
+        </span>
+      </a>
+    </>
   );
 }
