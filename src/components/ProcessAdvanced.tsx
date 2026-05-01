@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import ArrowButton from './ArrowButton';
+import MagicButton from './MagicButton';
 import { Search, Target, Layout, Palette, Code2, Rocket } from 'lucide-react';
 import './ProcessAdvanced.css';
 
@@ -175,7 +175,7 @@ export default function ProcessAdvanced() {
 
         
         <div className="cta-container">
-          <ArrowButton
+          <MagicButton
             href="#planos"
             onClick={(e) => {
               e.preventDefault();
@@ -183,7 +183,7 @@ export default function ProcessAdvanced() {
             }}
           >
             QUERO UM SITE DE ALTA PERFORMANCE
-          </ArrowButton>
+          </MagicButton>
           
           <div className="social-proof-block">
             <div className="avatar-group">
