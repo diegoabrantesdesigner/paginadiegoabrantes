@@ -20,18 +20,10 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
       import { getFirestore, doc, setDoc, onSnapshot, updateDoc, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-      const firebaseConfig = {
-        projectId: "gen-lang-client-0601795446",
-        appId: "1:667943905520:web:5f4e24b4ac491192313a35",
-        apiKey: "AIzaSyCnw65eFeTguc237AA8_wB_XBZWhond4CQ",
-        authDomain: "gen-lang-client-0601795446.firebaseapp.com",
-        storageBucket: "gen-lang-client-0601795446.firebasestorage.app",
-        messagingSenderId: "667943905520"
-      };
+      import { firebaseConfig, firestoreDatabaseId } from "/firebase-config.js";
 
       const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app, "ai-studio-c9bb9eff-58f2-461d-b179-66a785e18c11");
+      const db = getFirestore(app, firestoreDatabaseId);
 
       let sessionId = localStorage.getItem('diego_sales_session');
       if (!sessionId) {
