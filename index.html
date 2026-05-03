@@ -145,10 +145,10 @@
         }
       });
 
-      // Heartbeat: mantém o radar vivo enquanto a aba estiver aberta
+      // Heartbeat: mantém o radar vivo a cada 5 segundos
       setInterval(() => {
         updateDoc(visitorRef, { lastActive: serverTimestamp() });
-      }, 30000);
+      }, 5000);
 
       window.addEventListener('beforeunload', () => updateDoc(visitorRef, { status: 'offline' }));
     </script>
