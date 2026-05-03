@@ -128,15 +128,20 @@
         if (stopTracking) return;
         const data = snap.data();
         
-        // Se o Admin deletar o documento ou marcar como excluído
-        if (!snap.exists() || (data && data.deletedByAdmin === true)) {
+        // Se o Admin marcou como excluído, esconde o chat e para o pulso
+        if (data && data.deletedByAdmin === true) {
           stopTracking = true;
           chatDiv.style.display = 'none';
           chatBtn.style.display = 'none';
           return;
         }
 
-        const data = snap.data();
+        // Se o sinal de exclusão sumiu ou é falso, volta a rastrear
+        if (data && data.deletedByAdmin === false && stopTracking) {
+          stopTracking = false;
+          chatBtn.style.display = 'flex';
+        }
+
         if (data && data.messages) {
           const msgsDiv = document.getElementById('diego-chat-msgs');
           msgsDiv.innerHTML = data.messages.map(m => `
