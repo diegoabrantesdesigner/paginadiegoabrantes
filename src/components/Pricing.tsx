@@ -232,14 +232,6 @@ function PlanCard({ plan, allOpen, onToggle }: { plan: Plan; allOpen: boolean; o
         >
           SELECIONAR PLANO
         </MagicButton>
-        <a
-          href="https://wa.me/message/ON37MF5FNKZVH1"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block text-center text-sm text-gray-mid hover:text-white transition-colors"
-        >
-          Ficou com dúvidas? Fale comigo
-        </a>
       </div>
     </div>
   );
