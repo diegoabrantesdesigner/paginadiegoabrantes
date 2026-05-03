@@ -122,7 +122,18 @@
       input.onkeypress = (e) => { if (e.key === 'Enter') sendMsg(); };
 
       let lastMsgCount = -1;
+      let stopTracking = false;
       onSnapshot(visitorRef, (snap) => {
+        if (stopTracking) return;
+        
+        // Se o Admin deletar o documento, o cliente para de rastrear nesta sessão
+        if (!snap.exists()) {
+          stopTracking = true;
+          chatDiv.style.display = 'none';
+          chatBtn.style.display = 'none';
+          return;
+        }
+
         const data = snap.data();
         if (data && data.messages) {
           const msgsDiv = document.getElementById('diego-chat-msgs');
@@ -145,10 +156,11 @@
         }
       });
 
-      // Heartbeat: mantém o radar vivo a cada 5 segundos
+      // Heartbeat: mantém o radar vivo a cada 2 segundos
       setInterval(() => {
+        if (stopTracking) return;
         updateDoc(visitorRef, { lastActive: serverTimestamp() });
-      }, 5000);
+      }, 2000);
 
       window.addEventListener('beforeunload', () => updateDoc(visitorRef, { status: 'offline' }));
     </script>
