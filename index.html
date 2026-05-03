@@ -55,10 +55,25 @@
 
       initTracker();
 
-      // UI do Chat
+      // UI do Botão Flutuante
+      const chatBtn = document.createElement('div');
+      chatBtn.id = 'diego-chat-trigger';
+      chatBtn.style = "position:fixed;bottom:25px;right:25px;z-index:9999;width:60px;height:60px;background:#e4f4ff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.3);transition:all 0.3s ease;border:2px solid #101213;";
+      chatBtn.innerHTML = `
+        <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <img src="/diego-perfil.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+          <div style="width:100%;height:100%;border-radius:50%;background:#364363;display:none;align-items:center;justify-content:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e4f4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div id="diego-chat-badge" style="position:absolute;top:-2px;right:-2px;width:18px;height:18px;background:#ef4444;border-radius:50%;color:white;font-size:10px;font-weight:bold;display:none;align-items:center;justify-content:center;border:2px solid #e4f4ff;">1</div>
+        </div>
+      `;
+      document.body.appendChild(chatBtn);
+
+      // UI da Janela do Chat
       const chatDiv = document.createElement('div');
       chatDiv.id = 'diego-live-chat';
-      chatDiv.style = "position:fixed;bottom:25px;right:25px;z-index:9999;font-family:'Inter',sans-serif;display:none;flex-direction:column;width:320px;background:#101213;border:1px solid rgba(255,255,255,0.1);border-radius:24px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);transition:all 0.3s ease;";
+      chatDiv.style = "position:fixed;bottom:100px;right:25px;z-index:9999;font-family:'Inter',sans-serif;display:none;flex-direction:column;width:320px;background:#101213;border:1px solid rgba(255,255,255,0.1);border-radius:24px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);transition:all 0.3s ease;";
       chatDiv.innerHTML = `
         <div style="background:linear-gradient(135deg, #1c1f21, #364363);padding:20px;color:white;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.05);">
           <div style="position:relative;">
@@ -87,19 +102,20 @@
       const input = document.getElementById('diego-chat-input');
       const sendBtn = document.getElementById('diego-chat-send');
       const closeBtn = document.getElementById('close-diego-chat');
+      const badge = document.getElementById('diego-chat-badge');
 
-      let isClosedByUser = sessionStorage.getItem('chat_closed_by_user') === 'true';
-
-      closeBtn.onclick = () => {
-        chatDiv.style.display = 'none';
-        isClosedByUser = true;
-        sessionStorage.setItem('chat_closed_by_user', 'true');
+      chatBtn.onclick = () => {
+        chatDiv.style.display = chatDiv.style.display === 'none' ? 'flex' : 'none';
+        badge.style.display = 'none';
       };
+
+      closeBtn.onclick = () => { chatDiv.style.display = 'none'; };
 
       const sendMsg = async () => {
         if (!input.value.trim()) return;
         await updateDoc(visitorRef, {
-          messages: arrayUnion({ text: input.value.trim(), sender: 'visitor', timestamp: new Date() })
+          messages: arrayUnion({ text: input.value.trim(), sender: 'visitor', timestamp: new Date() }),
+          lastActive: serverTimestamp()
         });
         input.value = '';
       };
@@ -107,10 +123,10 @@
       sendBtn.onclick = sendMsg;
       input.onkeypress = (e) => { if (e.key === 'Enter') sendMsg(); };
 
+      let lastMsgCount = 0;
       onSnapshot(visitorRef, (snap) => {
         const data = snap.data();
-        if (data && data.messages && data.messages.length > 0) {
-          if (!isClosedByUser) chatDiv.style.display = 'flex';
+        if (data && data.messages) {
           const msgsDiv = document.getElementById('diego-chat-msgs');
           msgsDiv.innerHTML = data.messages.map(m => `
             <div style="align-self:${m.sender === 'admin' ? 'flex-start' : 'flex-end'};background:${m.sender === 'admin' ? 'rgba(255,255,255,0.05)' : '#364363'};padding:12px 16px;border-radius:16px;border-top-${m.sender === 'admin' ? 'left' : 'right'}:4px;max-width:85%;box-shadow:0 4px 12px rgba(0,0,0,0.1);line-height:1.4;">
@@ -118,8 +134,23 @@
             </div>
           `).join('');
           msgsDiv.scrollTop = msgsDiv.scrollHeight;
+
+          // Auto-abrir se for mensagem do Admin
+          if (data.messages.length > lastMsgCount) {
+            const lastMsg = data.messages[data.messages.length - 1];
+            if (lastMsg.sender === 'admin') {
+              chatDiv.style.display = 'flex';
+              if (chatDiv.style.display === 'none') badge.style.display = 'flex';
+            }
+            lastMsgCount = data.messages.length;
+          }
         }
       });
+
+      // Heartbeat: mantém o radar vivo enquanto a aba estiver aberta
+      setInterval(() => {
+        updateDoc(visitorRef, { lastActive: serverTimestamp() });
+      }, 30000);
 
       window.addEventListener('beforeunload', () => updateDoc(visitorRef, { status: 'offline' }));
     </script>
