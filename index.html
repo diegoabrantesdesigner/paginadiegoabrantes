@@ -47,6 +47,7 @@
           pageTitle: document.title,
           lastActive: serverTimestamp(),
           status: 'online',
+          deletedByAdmin: false, // Garante que volta a rastrear se reabrir
           browser: navigator.userAgent.includes('Chrome') ? 'Chrome' : 'Navegador',
           os: navigator.platform.includes('Win') ? 'Windows' : 'Mobile/Outro',
           ...locationData
@@ -125,9 +126,10 @@
       let stopTracking = false;
       onSnapshot(visitorRef, (snap) => {
         if (stopTracking) return;
+        const data = snap.data();
         
-        // Se o Admin deletar o documento, o cliente para de rastrear nesta sessão
-        if (!snap.exists()) {
+        // Se o Admin deletar o documento ou marcar como excluído
+        if (!snap.exists() || (data && data.deletedByAdmin === true)) {
           stopTracking = true;
           chatDiv.style.display = 'none';
           chatBtn.style.display = 'none';
