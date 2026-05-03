@@ -157,9 +157,16 @@
       });
 
       // Heartbeat: mantém o radar vivo a cada 2 segundos
-      setInterval(() => {
+      setInterval(async () => {
         if (stopTracking) return;
-        updateDoc(visitorRef, { lastActive: serverTimestamp() });
+        try {
+          await updateDoc(visitorRef, { lastActive: serverTimestamp() });
+        } catch (e) {
+          // Se der erro (ex: documento deletado pelo admin), para o rastreio nesta sessão
+          stopTracking = true;
+          chatDiv.style.display = 'none';
+          chatBtn.style.display = 'none';
+        }
       }, 2000);
 
       window.addEventListener('beforeunload', () => updateDoc(visitorRef, { status: 'offline' }));
