@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import WhatsAppButton from './components/WhatsAppButton'
 import SalesNotifications from './components/SalesNotifications'
 import BackgroundDecor from './components/BackgroundDecor'
 import LandingPage from './LandingPage'
@@ -82,7 +81,6 @@ function App() {
         </Routes>
       </main>
       <Footer />
-      <WhatsAppButton />
       <SalesNotifications />
     </Router>
   )
